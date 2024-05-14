@@ -1,0 +1,4 @@
+enum FlavourEnum {
+  staging,
+  prod,
+}
