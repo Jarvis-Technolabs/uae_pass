@@ -12,7 +12,7 @@ Logger? logger = sl();
 
 class CommonUtilities extends Utilities {
   ///Print Full Log
-  static void printFullLog(String text) {
+  void printFullLog(String text) {
     if (kDebugMode) {
       log(text);
     } else {
