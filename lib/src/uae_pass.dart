@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:uae_pass/src/features/uae_pass_web_view/data/models/UAEPassWebViewResultModel.dart';
+import 'package:uae_pass/src/features/uae_pass_web_view/presentation/uae_pass_web_view_page.dart';
 
 class UaePass {
   static signIn({
@@ -7,7 +9,7 @@ class UaePass {
     UAEPassWebViewResultModel model = await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (BuildContext context) => UAEPassWebViewPage(),
+        builder: (BuildContext context) => const UAEPassWebViewPage(),
       ),
     );
     if (model.status) {
