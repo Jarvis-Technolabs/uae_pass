@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:store_redirect/store_redirect.dart';
@@ -12,10 +11,10 @@ import 'package:uae_pass/src/core/localizations/app_localizations.dart';
 import 'package:uae_pass/src/core/util/common_utilities.dart';
 import 'package:uae_pass/src/features/uae_pass_web_view/data/models/UAEPassWebViewResultModel.dart';
 
-import '../../../core/const/UAEPassApiConstant.dart';
-import 'bloc/uae_pass_web_view_bloc.dart';
-import 'bloc/uae_pass_web_view_state.dart';
-import 'bloc/uaee_pass_web_view_event.dart';
+import '../../../../core/const/UAEPassApiConstant.dart';
+import '../bloc/uae_pass_web_view_bloc.dart';
+import '../bloc/uae_pass_web_view_state.dart';
+import '../bloc/uaee_pass_web_view_event.dart';
 
 class UAEPassWebViewScreen extends StatefulWidget {
   const UAEPassWebViewScreen({super.key});
@@ -35,6 +34,7 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
   String redirectUrl = "";
   String? successUrl = "";
   String? failureUrl = "";
+  String currentStateForUAEPassLogin = FlavourConfig.instance.state;
 
   @override
   void initState() {
@@ -43,8 +43,10 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
   }
 
   @override
-  Widget build(BuildContext context) => WillPopScope(
-        onWillPop: onClickBack,
+  Widget build(BuildContext context) => PopScope(
+        onPopInvoked: (bool didPop) async {
+          await onClickBack();
+        },
         child: Scaffold(
           resizeToAvoidBottomInset: false,
 
@@ -75,57 +77,59 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
           body: MultiBlocListener(
             listeners: [
               BlocListener<UAEPassWebViewBloc, UAEPassWebViewState>(
-                  listener: (context, state) async {
-                if (state is SetUAEPassLoginAuthenticationUrlState) {
-                  // set authentication url to redirect url for UAE Pass login
-                  redirectUrl = state.authenticationUrl;
-                } else if (state is FetchUAEPassProfileState) {
-                  // UAE Pass login -> fetch uae pass profile data
+                listener: (context, state) async {
+                  if (state is SetUAEPassLoginAuthenticationUrlState) {
+                    // set authentication url to redirect url for UAE Pass login
+                    redirectUrl = state.authenticationUrl;
+                  } else if (state is FetchUAEPassProfileState) {
+                    // UAE Pass login -> fetch uae pass profile data
 
-                  await webView.clearCache();
-                  UAEPassWebViewResultModel model = UAEPassWebViewResultModel(
-                      status: (state.uaeDataModel.userType != USER_TYPE_SOP1),
-                      message: "",
-                      uaeDataModel: state.uaeDataModel);
-                  goBack(context, result: model);
-                } else if (state is ErrorState) {
-                  // Error
+                    await InAppWebViewController.clearAllCache();
+                    UAEPassWebViewResultModel model = UAEPassWebViewResultModel(
+                        status: (state.uaeDataModel.userType != USER_TYPE_SOP1),
+                        message: "",
+                        uaeDataModel: state.uaeDataModel);
+                    goBack(context, result: model);
+                  } else if (state is ErrorState) {
+                    // Error
 
-                  await webView.clearCache();
-                  String? errorMessage = state.error;
-                  if (state.apiStatus == PROFILE_ERROR) {
-                    errorMessage = AppLocalizations.of(context)
-                        .translate(UNAUTHORISED_ERROR);
+                    await InAppWebViewController.clearAllCache();
+                    String? errorMessage = state.error;
+                    if (state.apiStatus == PROFILE_ERROR) {
+                      errorMessage = AppLocalizations.of(context)
+                          .translate(UNAUTHORISED_ERROR);
+                    }
+                    UAEPassWebViewResultModel model = UAEPassWebViewResultModel(
+                      status: false,
+                      message: errorMessage,
+                      errorType: state.apiStatus,
+                      uaeDataModel: state.uaeDataModel,
+                    );
+                    goBack(context, result: model);
                   }
-                  UAEPassWebViewResultModel model = UAEPassWebViewResultModel(
-                    status: false,
-                    message: errorMessage,
-                    errorType: state.apiStatus,
-                    uaeDataModel: state.uaeDataModel,
-                  );
-                  goBack(context, result: model);
-                }
-              })
+                },
+              )
             ],
             child: BlocBuilder<UAEPassWebViewBloc, UAEPassWebViewState>(
-                builder: (context, state) => Container(
-                      height: double.infinity,
-                      width: double.infinity,
-                      child: Stack(
-                        children: [
-                          if (redirectUrl.isNotEmpty) ...[getWebView()],
-                          Center(
-                            child: StreamBuilder<bool>(
-                              initialData: true,
-                              stream: showLoadingStreamController.stream,
-                              builder: (context, snapshot) => snapshot.data!
-                                  ? getCircularProgressIndicator()
-                                  : SizedBox.shrink(),
-                            ),
-                          )
-                        ],
+              builder: (context, state) => SizedBox(
+                height: double.infinity,
+                width: double.infinity,
+                child: Stack(
+                  children: [
+                    if (redirectUrl.isNotEmpty) ...[getWebView()],
+                    Center(
+                      child: StreamBuilder<bool>(
+                        initialData: true,
+                        stream: showLoadingStreamController.stream,
+                        builder: (context, snapshot) => snapshot.data!
+                            ? getCircularProgressIndicator()
+                            : const SizedBox.shrink(),
                       ),
-                    )),
+                    )
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
       );
@@ -143,12 +147,10 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
       SetUAEPassLoginAuthenticationUrlEvent(
         authenticationUrl: getFetchProfileUrl(
           isMobileApp,
-
-          ///Todo pass random generated state
-          "currentStateForUAEPassLogin",
-          FlavourConfig.instance!.apiBaseUrl,
-          FlavourConfig.instance!.redirectUrl,
-          FlavourConfig.instance!.clientId,
+          currentStateForUAEPassLogin,
+          FlavourConfig.instance.apiBaseUrl,
+          FlavourConfig.instance.redirectUrl,
+          FlavourConfig.instance.clientId,
         ),
       ),
     );
@@ -159,20 +161,16 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
         status: false,
         errorType: USER_CANCELLED,
         message: AppLocalizations.of(context).translate(LABEL_USER_CANCEL));
-    await webView.clearCache();
+    await InAppWebViewController.clearAllCache();
     Navigator.of(context).pop(model);
     return false;
   }
 
   Widget getWebView() => InAppWebView(
-        initialOptions: InAppWebViewGroupOptions(
-          crossPlatform: InAppWebViewOptions(
-            useShouldOverrideUrlLoading: true,
-            useOnLoadResource: true,
-          ),
-          android: AndroidInAppWebViewOptions(
-            useHybridComposition: true,
-          ),
+        initialSettings: InAppWebViewSettings(
+          useShouldOverrideUrlLoading: true,
+          useOnLoadResource: true,
+          useHybridComposition: true,
         ),
         initialUrlRequest: URLRequest(
           url: WebUri(redirectUrl),
@@ -218,14 +216,14 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
             if (Platform.isAndroid) {
               queryParameter.update(
                 KEY_SUCCESS_URL,
-                (existingValue) => FlavourConfig.instance!.redirectUrl,
-                ifAbsent: () => FlavourConfig.instance!.redirectUrl,
+                (existingValue) => FlavourConfig.instance.redirectUrl,
+                ifAbsent: () => FlavourConfig.instance.redirectUrl,
               );
 
               queryParameter.update(
                 KEY_FAILURE_URL,
-                (existingValue) => FlavourConfig.instance!.redirectUrl,
-                ifAbsent: () => FlavourConfig.instance!.redirectUrl,
+                (existingValue) => FlavourConfig.instance.redirectUrl,
+                ifAbsent: () => FlavourConfig.instance.redirectUrl,
               );
 
               callBackUri =
@@ -240,22 +238,23 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
               latestUrl = callBackUri.toString();
             }
 
-            var intent = await AppAvailability.launchApp(latestUrl);
-
-            // check if uae pass app returning with valid success data
-            if (intent != null && intent == KEY_LOAD_SUCCESS_URL) {
-              webView.loadUrl(
-                urlRequest: URLRequest(
-                  url: WebUri(successUrl!),
-                ),
-              );
-              return NavigationActionPolicy.CANCEL;
-            } else if (intent != null && intent == KEY_CANCELLED) {
-              BlocProvider.of<UAEPassWebViewBloc>(context).add(ErrorEvent(
-                  AppLocalizations.of(context).translate(LABEL_USER_CANCEL),
-                  USER_CANCELLED));
-              return NavigationActionPolicy.CANCEL;
-            }
+            ///Todo
+            // var intent = await AppAvailability.launchApp(latestUrl);
+            //
+            // // check if uae pass app returning with valid success data
+            // if (intent != null && intent == KEY_LOAD_SUCCESS_URL) {
+            //   webView.loadUrl(
+            //     urlRequest: URLRequest(
+            //       url: WebUri(successUrl!),
+            //     ),
+            //   );
+            //   return NavigationActionPolicy.CANCEL;
+            // } else if (intent != null && intent == KEY_CANCELLED) {
+            //   BlocProvider.of<UAEPassWebViewBloc>(context).add(ErrorEvent(
+            //       AppLocalizations.of(context).translate(LABEL_USER_CANCEL),
+            //       USER_CANCELLED));
+            //   return NavigationActionPolicy.CANCEL;
+            // }
             return NavigationActionPolicy.ALLOW;
           } else if ((Platform.isIOS && url.contains(UAE_PASS_IOS_APP_LINK)) ||
               (Platform.isAndroid && url.contains(UAE_PASS_ANDROID_APP_LINK))) {
@@ -268,14 +267,14 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
             } else {
               return NavigationActionPolicy.ALLOW;
             }
-          } else if (url.startsWith(FlavourConfig.instance!.cancelledUrl)) {
+          } else if (url.startsWith(FlavourConfig.instance.cancelledUrl)) {
             BlocProvider.of<UAEPassWebViewBloc>(context).add(ErrorEvent(
                 AppLocalizations.of(context).translate(LABEL_USER_CANCEL),
                 USER_CANCELLED));
             return NavigationActionPolicy.ALLOW;
           } else {
             // check if url start with redirect url
-            if (url.startsWith(FlavourConfig.instance!.redirectUrl)) {
+            if (url.startsWith(FlavourConfig.instance.redirectUrl)) {
               // get access code and current state
               String? code = CommonUtilities()
                   .getQueryParameterValue(KEY_CODE, WebUri(url));

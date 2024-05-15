@@ -10,10 +10,10 @@ class UAEPassAccessToken {
   });
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['grant_type'] = this.grant_type;
-    data['code'] = this.code;
-    data['redirect_uri'] = this.redirect_uri;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['grant_type'] = grant_type;
+    data['code'] = code;
+    data['redirect_uri'] = redirect_uri;
     return data;
   }
 }

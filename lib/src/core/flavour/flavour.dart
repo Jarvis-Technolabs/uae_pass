@@ -2,13 +2,17 @@ import 'package:uae_pass/src/core/flavour/flavour_config.dart';
 import 'package:uae_pass/src/core/flavour/flavour_enum.dart';
 
 class Flavour {
-  static void setStagingFlavor() {
+  static void setStagingFlavor({
+    required String redirectUrl,
+    required String state,
+  }) {
     FlavourConfig(
       flavorEnum: FlavourEnum.staging,
       apiBaseUrl: "https://stg-id.uaepass.ae/",
       clientId: "sandbox_stage",
       clientSecret: "sandbox_stage",
-      redirectUrl: "https://pftmapp.pension.gov.ae/uaepass.aspx",
+      redirectUrl: redirectUrl,
+      state: state,
       androidPackageId: "ae.uaepass.mainapp.stg",
       iosBundleSchema: "uaepassstg://",
       cancelledUrl: "com.mims.test://uaepass",
@@ -16,13 +20,19 @@ class Flavour {
     );
   }
 
-  static void setProdFlavor() {
+  static void setProdFlavor({
+    required String clientId,
+    required String clientSecret,
+    required String redirectUrl,
+    required String state,
+  }) {
     FlavourConfig(
       flavorEnum: FlavourEnum.prod,
       apiBaseUrl: "https://id.uaepass.ae/",
-      clientId: "adrpbfm_mob_prod",
-      clientSecret: "P0m2frrrawxtbh5out2",
-      redirectUrl: "https://mservicepre.pension.gov.ae/uaepass.aspx",
+      clientId: clientId,
+      clientSecret: clientSecret,
+      redirectUrl: redirectUrl,
+      state: state,
       androidPackageId: "ae.uaepass.mainapp",
       iosBundleSchema: "uaepass://",
       cancelledUrl: "https://ids.uaepass.ae/authenticationendpoint/retry.do",

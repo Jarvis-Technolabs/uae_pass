@@ -7,6 +7,7 @@ class FlavourConfig {
       clientId,
       clientSecret,
       redirectUrl,
+      state,
       androidPackageId,
       iosBundleSchema,
       cancelledUrl,
@@ -18,6 +19,7 @@ class FlavourConfig {
     required String clientId,
     required String clientSecret,
     required String redirectUrl,
+    required String state,
     required String androidPackageId,
     required String iosBundleSchema,
     required String cancelledUrl,
@@ -29,6 +31,7 @@ class FlavourConfig {
       clientId,
       clientSecret,
       redirectUrl,
+      state,
       androidPackageId,
       iosBundleSchema,
       cancelledUrl,
@@ -43,13 +46,14 @@ class FlavourConfig {
     this.clientId,
     this.clientSecret,
     this.redirectUrl,
+    this.state,
     this.androidPackageId,
     this.iosBundleSchema,
     this.cancelledUrl,
     this.certificatePath,
   );
 
-  static FlavourConfig? get instance => _instance;
+  static FlavourConfig get instance => _instance!;
 
   static bool isProd() => _instance!.flavorEnum == FlavourEnum.prod;
 

@@ -24,11 +24,11 @@ class CommonUtilities extends Utilities {
   Future<bool> isUaePassAppAvailable() async {
     if (Platform.isAndroid) {
       return await AppCheck.isAppInstalled(
-              FlavourConfig.instance!.androidPackageId) &&
-          await AppCheck.isAppEnabled(FlavourConfig.instance!.androidPackageId);
+              FlavourConfig.instance.androidPackageId) &&
+          await AppCheck.isAppEnabled(FlavourConfig.instance.androidPackageId);
     } else {
       return await AppCheck.isAppInstalled(
-          FlavourConfig.instance!.iosBundleSchema);
+          FlavourConfig.instance.iosBundleSchema);
     }
   }
 

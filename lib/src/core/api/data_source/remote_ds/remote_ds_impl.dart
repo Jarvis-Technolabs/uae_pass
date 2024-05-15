@@ -47,7 +47,7 @@ class RemoteDataSourceImpl extends IRemoteDataSource {
 
   Future<void> setClient() async {
     var certificate =
-        (await rootBundle.load(FlavourConfig.instance!.certificatePath))
+        (await rootBundle.load(FlavourConfig.instance.certificatePath))
             .buffer
             .asInt8List();
     client.httpClientAdapter = IOHttpClientAdapter(
@@ -241,7 +241,7 @@ class RemoteDataSourceImpl extends IRemoteDataSource {
   }
 }
 
-String getBaseUrl() => FlavourConfig.instance!.apiBaseUrl;
+String getBaseUrl() => FlavourConfig.instance.apiBaseUrl;
 
 MediaType? getContentType(String contentType) {
   List<String> contentTypeList = contentType.split('/');

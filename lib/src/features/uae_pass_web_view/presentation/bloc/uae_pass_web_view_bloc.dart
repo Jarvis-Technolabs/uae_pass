@@ -32,7 +32,7 @@ class UAEPassWebViewBloc
     UAEPassAccessToken uaePassAccessToken = UAEPassAccessToken(
       code: accessToken,
       grant_type: KEY_AUTHORIZATION_CODE,
-      redirect_uri: FlavourConfig.instance!.redirectUrl,
+      redirect_uri: FlavourConfig.instance.redirectUrl,
     );
     final output =
         await uaePassRepo!.callUAEPassAccessToken(uaePassAccessToken);
