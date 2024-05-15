@@ -111,16 +111,25 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
     /// set authentication url to redirect url for UAE Pass login
     BlocProvider.of<UAEPassWebViewBloc>(context).add(
       SetUAEPassLoginAuthenticationUrlEvent(
-        authenticationUrl: getFetchProfileUrl(
-          isMobileApp,
-          currentStateForUAEPassLogin,
-          FlavourConfig.instance.apiBaseUrl,
-          FlavourConfig.instance.redirectUrl,
-          FlavourConfig.instance.clientId,
+        authenticationUrl: createAuthUrl(
+          isMobileApp: isMobileApp,
+          state: currentStateForUAEPassLogin,
+          baseUrl: FlavourConfig.instance.apiBaseUrl,
+          redirectUrl: FlavourConfig.instance.redirectUrl,
+          clientID: FlavourConfig.instance.clientId,
         ),
       ),
     );
   }
+
+  String createAuthUrl({
+    required bool isMobileApp,
+    required String state,
+    required String baseUrl,
+    required String redirectUrl,
+    required String clientID,
+  }) =>
+      "$baseUrl$UAE_PASS_AUTHENTICATION_URL?redirect_uri=$redirectUrl&client_id=$clientID&$KEY_STATE=$state&response_type=$RESPONSE_TYPE&scope=$SCOPE&acr_values=${isMobileApp ? ACR_VALUES_MOBILE : ACR_VALUES_WEB}&ui_locales=en";
 
   Future<bool> onClickBack() async {
     UAEPassWebViewResultModel model = UAEPassWebViewResultModel(
@@ -160,11 +169,11 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
           /// check if url define to redirect in uae pass app or web otherwise send in else part
           if (url.contains(DIGITAL_ID_URL_APP)) {
             /// check if uae pass production app and in android
-            if (!FlavourConfig.isProd()) {
-              /// replace android schema with android staging schema for uae pass app
-              url = url.replaceAll(UAE_PASS_ANDROID_PROD_BUNDLE_ID,
-                  UAE_PASS_ANDROID_STAGING_BUNDLE_ID);
-            }
+            // if (!FlavourConfig.isProd()) {
+            /// replace android schema with android staging schema for uae pass app
+            //   url = url.replaceAll(UAE_PASS_ANDROID_PROD_BUNDLE_ID,
+            //       UAE_PASS_ANDROID_STAGING_BUNDLE_ID);
+            // }
 
             /// get successurl or failureurl for loading when authorization is successfully
             successUrl = CommonUtilities()
@@ -225,7 +234,7 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
           } else if ((Platform.isIOS && url.contains(UAE_PASS_IOS_APP_LINK)) ||
               (Platform.isAndroid && url.contains(UAE_PASS_ANDROID_APP_LINK))) {
             StoreRedirect.redirect(
-              androidAppId: PROD_UAE_PASS_ANDROID_PACKAGE_ID,
+              androidAppId: FlavourConfig.instance.androidPackageId,
               iOSAppId: UAE_PASS_IOS_APP_STORE_ID,
             );
             if (Platform.isAndroid) {

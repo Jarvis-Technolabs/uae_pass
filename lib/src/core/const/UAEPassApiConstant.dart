@@ -1,4 +1,6 @@
 // UAE Pass web api
+import 'package:uae_pass/src/core/flavour/flavour_config.dart';
+
 const String UAE_PASS_AUTHENTICATION_URL = "idshub/authorize";
 const String UAE_PASS_TOKEN_URL = "idshub/token";
 const String UAE_PASS_PROFILE_URL = "idshub/userinfo";
@@ -40,16 +42,11 @@ const String KEY_CLIENT_ID = "client_id";
 const String KEY_CLIENT_SECRET = "client_secret";
 
 // uae pass app details
-const String PROD_UAE_PASS_ANDROID_PACKAGE_ID = "ae.uaepass.mainapp";
-const String STAGING_UAE_PASS_ANDROID_PACKAGE_ID = "ae.uaepass.mainapp.stg";
-
-const String UAE_PASS_ANDROID_PROD_BUNDLE_ID = "uaepass://";
-const String UAE_PASS_ANDROID_STAGING_BUNDLE_ID = "uaepassstg://";
+const String UAE_PASS_IOS_APP_STORE_ID = "1377158818";
 const String UAE_PASS_IOS_APP_LINK =
     "itms-appss://apps.apple.com/ae/app/uae-pass/id$UAE_PASS_IOS_APP_STORE_ID";
-const String UAE_PASS_IOS_APP_STORE_ID = "1377158818";
-const String UAE_PASS_ANDROID_APP_LINK =
-    "https://play.google.com/store/apps/details?id=$PROD_UAE_PASS_ANDROID_PACKAGE_ID";
+String UAE_PASS_ANDROID_APP_LINK =
+    "https://play.google.com/store/apps/details?id=${FlavourConfig.instance.androidPackageId}";
 
 // uae pass locations attribute
 const String UAE_PASS_KIOSK_LOCATIONS = "https://selfcare.uaepass.ae/locations";
