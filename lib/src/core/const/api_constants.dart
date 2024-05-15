@@ -1,5 +1,3 @@
-import 'package:uae_pass/src/core/flavour/flavour_config.dart';
-
 ///API timeout times
 const int API_CONNECT_TIMEOUT = 30000;
 const int SIGNAL_R_SOCKET_CONNECT_TIMEOUT = 30000;
@@ -63,18 +61,6 @@ const String KEY_CONTENT_TYPE = "Content-Type";
 const String KEY_AUTHORIZATION_CODE = "authorization_code";
 const String KEY_CLIENT_ID = "client_id";
 const String KEY_CLIENT_SECRET = "client_secret";
-
-// uae pass app details
-const String UAE_PASS_IOS_APP_STORE_ID = "1377158818";
-const String UAE_PASS_IOS_APP_LINK =
-    "itms-appss://apps.apple.com/ae/app/uae-pass/id$UAE_PASS_IOS_APP_STORE_ID";
-String UAE_PASS_ANDROID_APP_LINK =
-    "https://play.google.com/store/apps/details?id=${FlavourConfig.instance.androidPackageId}";
-
-// uae pass locations attribute
-const String UAE_PASS_KIOSK_LOCATIONS = "https://selfcare.uaepass.ae/locations";
-const String UAE_PASS_SP = "tel://800555";
-const String UAE_PASS_SP_NAME = "800555";
 
 // web api error type
 const int RESULT_OK = 200;

@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:store_redirect/store_redirect.dart';
 import 'package:uae_pass/src/core/const/api_constants.dart';
+import 'package:uae_pass/src/core/const/app_constants.dart';
 import 'package:uae_pass/src/core/const/string_constants.dart';
 import 'package:uae_pass/src/core/flavour/flavour_config.dart';
 import 'package:uae_pass/src/core/localizations/app_localizations.dart';
