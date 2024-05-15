@@ -4,8 +4,8 @@ import 'package:uae_pass/src/core/api/model/api_response.dart';
 import 'package:uae_pass/src/core/api/model/failure.dart';
 import 'package:uae_pass/src/core/api/model/success.dart';
 import 'package:uae_pass/src/features/uae_pass_web_view/data/datasource/uae_pass_data_source.dart';
-import 'package:uae_pass/src/features/uae_pass_web_view/data/models/UAEDataModel.dart';
-import 'package:uae_pass/src/features/uae_pass_web_view/data/models/UAEPassAccessToken.dart';
+import 'package:uae_pass/src/features/uae_pass_web_view/data/models/uae_data_model.dart';
+import 'package:uae_pass/src/features/uae_pass_web_view/data/models/uae_pass_access_token.dart';
 import 'package:uae_pass/src/features/uae_pass_web_view/domain/uae_pass_repo.dart';
 
 import '../../../../core/const/UAEPassApiConstant.dart';
@@ -40,10 +40,10 @@ class UaePassRepoImpl extends UaePassRepo {
   }
 
   @override
-  Future<Either<Failure, Success>> getUserData(String? accessToken) =>
+  Future<Either<Failure, Success>> getUserData(String accessToken) =>
       baseApiMethod(() => getUserDataAPI(accessToken));
 
-  Future<Either<Failure, Success>> getUserDataAPI(String? accessToken) async {
+  Future<Either<Failure, Success>> getUserDataAPI(String accessToken) async {
     ApiResponse response = await uaePassDataSource.getUserData(accessToken);
     if (!response.status!) {
       return Left(

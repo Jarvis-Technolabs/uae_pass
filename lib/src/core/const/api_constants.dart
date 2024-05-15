@@ -21,3 +21,5 @@ const String SOCKET_EXCEPTION = "SocketException";
 const String CONTENT_TYPE = "content-Type";
 const String ACCEPT = "Accept";
 const String APPLICATION_JSON_CONTENT_TYPE = 'application/json';
+const String APPLICATION_X_WWW_URL_FORM_URL_ENCODED_CONTENT_TYPE =
+    "application/x-www-form-urlencoded; charset=UTF-8";

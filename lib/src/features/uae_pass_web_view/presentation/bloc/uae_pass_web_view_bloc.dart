@@ -1,13 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uae_pass/src/core/di/injection_container.dart';
 import 'package:uae_pass/src/core/flavour/flavour_config.dart';
-import 'package:uae_pass/src/features/uae_pass_web_view/data/models/UAEDataModel.dart';
-import 'package:uae_pass/src/features/uae_pass_web_view/data/models/UAEPassAccessToken.dart';
+import 'package:uae_pass/src/features/uae_pass_web_view/data/models/uae_data_model.dart';
+import 'package:uae_pass/src/features/uae_pass_web_view/data/models/uae_pass_access_token.dart';
 import 'package:uae_pass/src/features/uae_pass_web_view/domain/uae_pass_repo.dart';
 
 import '../../../../core/const/UAEPassApiConstant.dart';
+import 'uae_pass_web_view_event.dart';
 import 'uae_pass_web_view_state.dart';
-import 'uaee_pass_web_view_event.dart';
 
 class UAEPassWebViewBloc
     extends Bloc<UAEPassWebViewEvent, UAEPassWebViewState> {

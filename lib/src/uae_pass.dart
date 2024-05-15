@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uae_pass/src/core/flavour/flavour.dart';
-import 'package:uae_pass/src/features/uae_pass_web_view/data/models/UAEPassWebViewResultModel.dart';
+import 'package:uae_pass/src/features/uae_pass_web_view/data/models/uae_pass_web_view_result_model.dart';
 import 'package:uae_pass/src/features/uae_pass_web_view/presentation/uae_pass_web_view_page.dart';
 
 class UaePass {

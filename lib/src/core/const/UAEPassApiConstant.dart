@@ -67,10 +67,3 @@ const int LOGIN_ERROR = -9;
 // Todo remove when uae pass integration complete
 // const String UAE_PASS_LOGOUT_URL =
 //     "authserver/digitalid-idp/logout?redirect_uri=" + REDIRECT_URL;
-
-// url for fetching uae pass login
-String getFetchProfileUrl(bool isMobileApp, String state, String baseUrl,
-    String redirectUrl, String clientID) {
-  String arcValues = isMobileApp ? ACR_VALUES_MOBILE : ACR_VALUES_WEB;
-  return "$baseUrl$UAE_PASS_AUTHENTICATION_URL?redirect_uri=$redirectUrl&client_id=$clientID&$KEY_STATE=$state&response_type=$RESPONSE_TYPE&scope=$SCOPE&acr_values=$arcValues&ui_locales=en";
-}

@@ -1,6 +1,6 @@
 import 'package:uae_pass/src/core/const/UAEPassApiConstant.dart';
 
-import 'UAEDataModel.dart';
+import 'uae_data_model.dart';
 
 class UAEPassWebViewResultModel {
   bool status;

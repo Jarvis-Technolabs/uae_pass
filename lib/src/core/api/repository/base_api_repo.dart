@@ -6,12 +6,11 @@ import 'package:dio/dio.dart';
 
 import '../../const/api_constants.dart';
 import '../../const/string_constants.dart';
-import '../data_source/mock/mock_data_impl.dart';
 import '../data_source/network_info/network_info.dart';
 import '../model/failure.dart';
 import '../model/success.dart';
 
-abstract class BaseApiRepo with MockDataImpl {
+abstract class BaseApiRepo {
   final NetworkInfo networkInfo;
 
   BaseApiRepo({

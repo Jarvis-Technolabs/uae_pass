@@ -9,12 +9,12 @@ import 'package:uae_pass/src/core/const/StringConstants.dart';
 import 'package:uae_pass/src/core/flavour/flavour_config.dart';
 import 'package:uae_pass/src/core/localizations/app_localizations.dart';
 import 'package:uae_pass/src/core/util/common_utilities.dart';
-import 'package:uae_pass/src/features/uae_pass_web_view/data/models/UAEPassWebViewResultModel.dart';
+import 'package:uae_pass/src/features/uae_pass_web_view/data/models/uae_pass_web_view_result_model.dart';
 
 import '../../../../core/const/UAEPassApiConstant.dart';
 import '../bloc/uae_pass_web_view_bloc.dart';
+import '../bloc/uae_pass_web_view_event.dart';
 import '../bloc/uae_pass_web_view_state.dart';
-import '../bloc/uaee_pass_web_view_event.dart';
 
 class UAEPassWebViewScreen extends StatefulWidget {
   const UAEPassWebViewScreen({super.key});

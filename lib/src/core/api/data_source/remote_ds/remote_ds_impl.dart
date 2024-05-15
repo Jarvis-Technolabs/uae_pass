@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+import 'package:uae_pass/src/core/const/UAEPassApiConstant.dart';
 import 'package:uae_pass/src/core/di/injection_container.dart';
 import 'package:uae_pass/src/core/flavour/flavour_config.dart';
 import 'package:uae_pass/src/core/util/common_utilities.dart';
@@ -65,8 +66,14 @@ class RemoteDataSourceImpl extends IRemoteDataSource {
     Map<String, dynamic> header = <String, dynamic>{};
     header.putIfAbsent(
       CONTENT_TYPE,
-      () => APPLICATION_JSON_CONTENT_TYPE,
+      () => APPLICATION_X_WWW_URL_FORM_URL_ENCODED_CONTENT_TYPE,
     );
+    if (token != null) {
+      header.putIfAbsent(
+        KEY_AUTHORIZATION,
+        () => token,
+      );
+    }
     return header;
   }
 
@@ -134,6 +141,7 @@ class RemoteDataSourceImpl extends IRemoteDataSource {
       method: GET_METHOD,
       queryParameters: queryParameters,
       requestBody: requestBody,
+      token: token,
     );
   }
 
@@ -150,6 +158,7 @@ class RemoteDataSourceImpl extends IRemoteDataSource {
       method: POST_METHOD,
       queryParameters: queryParameters,
       requestBody: requestBody,
+      token: token,
     );
   }
 
@@ -205,6 +214,7 @@ class RemoteDataSourceImpl extends IRemoteDataSource {
       method: PUT_METHOD,
       queryParameters: queryParameters,
       requestBody: requestBody,
+      token: token,
     );
   }
 
@@ -221,6 +231,7 @@ class RemoteDataSourceImpl extends IRemoteDataSource {
       method: PATCH_METHOD,
       queryParameters: queryParameters,
       requestBody: requestBody,
+      token: token,
     );
   }
 
@@ -237,6 +248,7 @@ class RemoteDataSourceImpl extends IRemoteDataSource {
       method: DELETE_METHOD,
       queryParameters: queryParameters,
       requestBody: requestBody,
+      token: token,
     );
   }
 }
