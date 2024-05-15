@@ -7,12 +7,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
-import 'package:uae_pass/src/core/const/UAEPassApiConstant.dart';
+import 'package:uae_pass/src/core/const/api_constants.dart';
 import 'package:uae_pass/src/core/di/injection_container.dart';
 import 'package:uae_pass/src/core/flavour/flavour_config.dart';
 import 'package:uae_pass/src/core/util/common_utilities.dart';
 
-import '../../../const/api_constants.dart';
 import '../../model/api_response.dart';
 import '../../model/exception.dart';
 import '../../model/file_upload_request_model.dart';

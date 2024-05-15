@@ -1,4 +1,4 @@
-import 'package:uae_pass/src/core/const/UAEPassApiConstant.dart';
+import 'package:uae_pass/src/core/const/api_constants.dart';
 
 import 'uae_data_model.dart';
 

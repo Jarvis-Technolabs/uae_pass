@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:uae_pass/src/core/api/data_source/remote_ds/remote_ds.dart';
 import 'package:uae_pass/src/core/api/model/api_response.dart';
-import 'package:uae_pass/src/core/const/UAEPassApiConstant.dart';
+import 'package:uae_pass/src/core/const/api_constants.dart';
 import 'package:uae_pass/src/core/flavour/flavour_config.dart';
 import 'package:uae_pass/src/features/uae_pass_web_view/data/models/uae_pass_access_token.dart';
 
