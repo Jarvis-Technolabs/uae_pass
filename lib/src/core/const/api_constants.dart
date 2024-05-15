@@ -8,12 +8,6 @@ const int SEND_TIMEOUT = 60000;
 const int LOCAL_ERROR_CODE = 0;
 const int UN_AUTHORISED_ERROR_CODE = 401;
 
-///Firebase authorization errors
-const String ACCOUNT_WITH_DIFFERENT_CREDENTIAL =
-    "account-exists-with-different-credential";
-const String INVALID_CREDENTIAL = "invalid-credential";
-const String USER_NOT_FOUND = "user-not-found";
-
 ///String exception
 const String SOCKET_EXCEPTION = "SocketException";
 

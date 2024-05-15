@@ -86,37 +86,4 @@ abstract class BaseApiRepo {
           statusCode: LOCAL_ERROR_CODE,
         ),
       );
-
-  Left<Failure, Success> fireBaseAuthError(String errorCode) {
-    switch (errorCode) {
-      case ACCOUNT_WITH_DIFFERENT_CREDENTIAL:
-        return Left(
-          ServerFailure(
-            errorMessage: LABEL_ACCOUNT_ALREADY_EXIST,
-            statusCode: LOCAL_ERROR_CODE,
-          ),
-        );
-      case USER_NOT_FOUND:
-        return Left(
-          ServerFailure(
-            errorMessage: LABEL_USER_DOES_NOT_EXIST,
-            statusCode: LOCAL_ERROR_CODE,
-          ),
-        );
-      case INVALID_CREDENTIAL:
-        return Left(
-          ServerFailure(
-            errorMessage: LABEL_CREDENTIALS_ARE_INVALID,
-            statusCode: LOCAL_ERROR_CODE,
-          ),
-        );
-      default:
-        return Left(
-          ServerFailure(
-            errorMessage: LABEL_SOMETHING_WENT_WRONG,
-            statusCode: LOCAL_ERROR_CODE,
-          ),
-        );
-    }
-  }
 }

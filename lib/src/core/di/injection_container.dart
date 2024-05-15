@@ -10,8 +10,6 @@ import '../api/data_source/network_info/network_info_impl.dart';
 import '../api/data_source/remote_ds/remote_ds.dart';
 import '../api/data_source/remote_ds/remote_ds_impl.dart';
 import '../api/interceptor/api_call_log_printer_interceptor.dart';
-import '../device_info/repository/device_info_data_source.dart';
-import '../device_info/repository/device_info_data_source_impl.dart';
 import '../loggers/app_log_filter.dart';
 import '../loggers/app_log_printer.dart';
 import '../loggers/log_to_file.dart';
@@ -58,9 +56,4 @@ Future<void> init() async {
   Dio dio = Dio();
   dio.interceptors.add(ApiCallLogPrinterInterceptors());
   sl.registerSingleton<Dio>(dio);
-
-  ///Device information
-  sl.registerLazySingleton<DeviceInfoDataSource>(
-    () => DeviceInfoDataSourceImpl(),
-  );
 }
