@@ -26,8 +26,6 @@ class UAEPassWebViewScreen extends StatefulWidget {
 class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
   late InAppWebViewController webView;
 
-  late bool isDarkTheme, isEnglish;
-
   StreamController<bool> showLoadingStreamController =
       StreamController<bool>.broadcast();
 
@@ -37,112 +35,80 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
   String currentStateForUAEPassLogin = FlavourConfig.instance.state;
 
   @override
-  void initState() {
+  void initState() async {
+    await createUrl();
     super.initState();
-    createUrl();
   }
 
   @override
   Widget build(BuildContext context) => PopScope(
         onPopInvoked: (bool didPop) async {
-          await onClickBack();
+          if (await webView.canGoBack()) {
+            await webView.goBack();
+          } else {
+            await onClickBack();
+          }
         },
         child: Scaffold(
           resizeToAvoidBottomInset: false,
+          body: BlocConsumer<UAEPassWebViewBloc, UAEPassWebViewState>(
+            listener: (context, state) async {
+              if (state is SetUAEPassLoginAuthenticationUrlState) {
+                /// set authentication url to redirect url for UAE Pass login
+                redirectUrl = state.authenticationUrl;
+              } else if (state is FetchUAEPassProfileState) {
+                /// UAE Pass login -> fetch uae pass profile data
 
-          ///todo pass app bar
-          // appBar: AppBar(
-          //   systemOverlayStyle: getBrightness(),
-          //   elevation: 0.0,
-          //   backgroundColor: appColors.changedPensionerBackgroundColor,
-          //   leading: BackIcon(
-          //     screenUtil: screenUtil,
-          //     iconColor: appColors.backIconBrownColor,
-          //     onBackCalled: () async {
-          //       if (await webView.canGoBack()) {
-          //         await webView.goBack();
-          //       } else {
-          //         onClickBack();
-          //       }
-          //     },
-          //   ),
-          //   title: Container(
-          //     child: getAppbarLogoPath().getImage(
-          //       screenUtil: screenUtil!,
-          //       height: 60.0,
-          //       width: 180.0,
-          //     ),
-          //   ),
-          // ),
-          body: MultiBlocListener(
-            listeners: [
-              BlocListener<UAEPassWebViewBloc, UAEPassWebViewState>(
-                listener: (context, state) async {
-                  if (state is SetUAEPassLoginAuthenticationUrlState) {
-                    // set authentication url to redirect url for UAE Pass login
-                    redirectUrl = state.authenticationUrl;
-                  } else if (state is FetchUAEPassProfileState) {
-                    // UAE Pass login -> fetch uae pass profile data
-
-                    await InAppWebViewController.clearAllCache();
-                    UAEPassWebViewResultModel model = UAEPassWebViewResultModel(
-                        status: (state.uaeDataModel.userType != USER_TYPE_SOP1),
-                        message: "",
-                        uaeDataModel: state.uaeDataModel);
-                    goBack(context, result: model);
-                  } else if (state is ErrorState) {
-                    // Error
-
-                    await InAppWebViewController.clearAllCache();
-                    String? errorMessage = state.error;
-                    if (state.apiStatus == PROFILE_ERROR) {
-                      errorMessage = AppLocalizations.of(context)
-                          .translate(UNAUTHORISED_ERROR);
-                    }
-                    UAEPassWebViewResultModel model = UAEPassWebViewResultModel(
-                      status: false,
-                      message: errorMessage,
-                      errorType: state.apiStatus,
-                      uaeDataModel: state.uaeDataModel,
-                    );
-                    goBack(context, result: model);
-                  }
-                },
-              )
-            ],
-            child: BlocBuilder<UAEPassWebViewBloc, UAEPassWebViewState>(
-              builder: (context, state) => SizedBox(
-                height: double.infinity,
-                width: double.infinity,
-                child: Stack(
-                  children: [
-                    if (redirectUrl.isNotEmpty) ...[getWebView()],
-                    Center(
-                      child: StreamBuilder<bool>(
-                        initialData: true,
-                        stream: showLoadingStreamController.stream,
-                        builder: (context, snapshot) => snapshot.data!
-                            ? getCircularProgressIndicator()
-                            : const SizedBox.shrink(),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+                await InAppWebViewController.clearAllCache();
+                UAEPassWebViewResultModel uAEPassWebViewResultModel =
+                    UAEPassWebViewResultModel(
+                  status: (state.uaeDataModel.userType != USER_TYPE_SOP1),
+                  message: "",
+                  uaeDataModel: state.uaeDataModel,
+                );
+                goBack(context, result: uAEPassWebViewResultModel);
+              } else if (state is ErrorState) {
+                /// Error
+                await InAppWebViewController.clearAllCache();
+                String? errorMessage = state.error;
+                if (state.apiStatus == PROFILE_ERROR) {
+                  errorMessage = AppLocalizations.of(context)
+                      .translate(UNAUTHORISED_ERROR);
+                }
+                UAEPassWebViewResultModel uAEPassWebViewResultModel =
+                    UAEPassWebViewResultModel(
+                  status: false,
+                  message: errorMessage,
+                  errorType: state.apiStatus,
+                  uaeDataModel: state.uaeDataModel,
+                );
+                goBack(context, result: uAEPassWebViewResultModel);
+              }
+            },
+            builder: (context, state) => Column(
+              children: [
+                if (redirectUrl.isNotEmpty) ...[getWebView()],
+                Center(
+                  child: StreamBuilder<bool>(
+                    initialData: true,
+                    stream: showLoadingStreamController.stream,
+                    builder: (context, snapshot) => snapshot.data!
+                        ? const CircularProgressIndicator()
+                        : const SizedBox.shrink(),
+                  ),
+                )
+              ],
             ),
           ),
         ),
       );
 
-  CircularProgressIndicator getCircularProgressIndicator() =>
-      const CircularProgressIndicator();
-
-  createUrl() async {
-    // Check UAE Pass app installed or not in android or ios
+  Future<void> createUrl() async {
+    /// Check UAE Pass app installed or not in android or ios
     bool isMobileApp = await CommonUtilities().isUaePassAppAvailable();
 
-    // Fetch Profile url based on UAE pass app installed or not
-    // set authentication url to redirect url for UAE Pass login
+    /// Fetch Profile url based on UAE pass app installed or not
+    /// set authentication url to redirect url for UAE Pass login
     BlocProvider.of<UAEPassWebViewBloc>(context).add(
       SetUAEPassLoginAuthenticationUrlEvent(
         authenticationUrl: getFetchProfileUrl(
@@ -191,28 +157,28 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
             NavigationAction navigationAction) async {
           String url = navigationAction.request.url.toString();
 
-          // check if url define to redirect in uae pass app or web otherwise send in else part
+          /// check if url define to redirect in uae pass app or web otherwise send in else part
           if (url.contains(DIGITAL_ID_URL_APP)) {
-            // check if uae pass production app and in android
+            /// check if uae pass production app and in android
             if (!FlavourConfig.isProd()) {
-              // replace android schema with android staging schema for uae pass app
+              /// replace android schema with android staging schema for uae pass app
               url = url.replaceAll(UAE_PASS_ANDROID_PROD_BUNDLE_ID,
                   UAE_PASS_ANDROID_STAGING_BUNDLE_ID);
             }
 
-            // get successurl or failureurl for loading when authorization is successfully
+            /// get successurl or failureurl for loading when authorization is successfully
             successUrl = CommonUtilities()
                 .getQueryParameterValue(KEY_SUCCESS_URL, WebUri(url));
             failureUrl = CommonUtilities()
                 .getQueryParameterValue(KEY_FAILURE_URL, WebUri(url));
 
-            // url to pass in uae pass app for authorization
+            /// url to pass in uae pass app for authorization
             Uri callBackUri = WebUri(url);
             String latestUrl = "";
             Map<String, String?> queryParameter = {};
             queryParameter.addAll(callBackUri.queryParameters);
 
-            // change some parameter based on platform android and ios
+            /// change some parameter based on platform android and ios
             if (Platform.isAndroid) {
               queryParameter.update(
                 KEY_SUCCESS_URL,
@@ -273,9 +239,9 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
                 USER_CANCELLED));
             return NavigationActionPolicy.ALLOW;
           } else {
-            // check if url start with redirect url
+            /// check if url start with redirect url
             if (url.startsWith(FlavourConfig.instance.redirectUrl)) {
-              // get access code and current state
+              /// get access code and current state
               String? code = CommonUtilities()
                   .getQueryParameterValue(KEY_CODE, WebUri(url));
               String? currentState = CommonUtilities()
@@ -283,9 +249,9 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
               String? error = CommonUtilities()
                   .getQueryParameterValue(KEY_ERROR, WebUri(url));
 
-              // check any error exist
+              /// check any error exist
               if (error != null) {
-                // check type of error and close with error
+                /// check type of error and close with error
                 if (error.contains(KEY_ACCESS_DENIED)) {
                   BlocProvider.of<UAEPassWebViewBloc>(context).add(ErrorEvent(
                       AppLocalizations.of(context).translate(LABEL_USER_CANCEL),
@@ -298,13 +264,14 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
                 return NavigationActionPolicy.ALLOW;
               }
 
-              // check if url return exact state that we pass in fetchprofileurl
+              /// check if url return exact state that we pass in fetchprofileurl
               if (currentStateForUAEPassLogin != currentState) {
                 code = null;
               }
-              // check if code is valid or not
+
+              /// check if code is valid or not
               if (code != null) {
-                // use access code for finding uae pass profile data from access code
+                /// use access code for finding uae pass profile data from access code
                 BlocProvider.of<UAEPassWebViewBloc>(context)
                     .add(FetchUAEPassProfileEvent(accessToken: code));
               }
@@ -322,6 +289,9 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
     showLoadingStreamController.close();
   }
 
-  void goBack(BuildContext context, {dynamic result}) =>
+  void goBack(
+    BuildContext context, {
+    dynamic result,
+  }) =>
       Navigator.pop(context, result);
 }
