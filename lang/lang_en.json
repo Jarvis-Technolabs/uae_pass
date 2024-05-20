@@ -1,0 +1,9 @@
+{
+  "unauthorised_message": "Your session has expired, please login again to continue",
+  "label_user_cancel": "Login was unsuccessful!",
+  "internal_server_error": "Sorry, Unexpected Error happened and our team is working to solve it soon. Please try again later.",
+  "timeout_error_message": "Processing your request took longer than expected, please try again later",
+  "label_your_account_unverified": "Your account is unverified, please visit the nearest UAE PASS",
+  "something_went_wrong": "Something went wrong. Please try again after sometime",
+  "internet_connection_error": "Please check internet connection"
+}

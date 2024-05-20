@@ -19,26 +19,27 @@ class UAEDataModel {
   String? acr;
   String? mobile;
 
-  UAEDataModel(
-      {this.idType,
-      this.sub,
-      this.spuuid,
-      this.lastnameEN,
-      this.firstnameEN,
-      this.nationalityAR,
-      this.idn,
-      this.userType,
-      this.fullnameAR,
-      this.email,
-      this.fullnameEN,
-      this.firstnameAR,
-      this.nationalityEN,
-      this.domain,
-      this.gender,
-      this.lastnameAR,
-      this.uuid,
-      this.acr,
-      this.mobile});
+  UAEDataModel({
+    this.idType,
+    this.sub,
+    this.spuuid,
+    this.lastnameEN,
+    this.firstnameEN,
+    this.nationalityAR,
+    this.idn,
+    this.userType,
+    this.fullnameAR,
+    this.email,
+    this.fullnameEN,
+    this.firstnameAR,
+    this.nationalityEN,
+    this.domain,
+    this.gender,
+    this.lastnameAR,
+    this.uuid,
+    this.acr,
+    this.mobile,
+  });
 
   UAEDataModel.fromJson(Map<String, dynamic> json) {
     idType = json['idType'] ?? "";
@@ -87,7 +88,6 @@ class UAEDataModel {
   }
 
   @override
-  String toString() {
-    return 'UAEDataModel{idType: $idType, sub: $sub, spuuid: $spuuid, lastnameEN: $lastnameEN, firstnameEN: $firstnameEN, nationalityAR: $nationalityAR, idn: $idn, userType: $userType, fullnameAR: $fullnameAR, email: $email, fullnameEN: $fullnameEN, firstnameAR: $firstnameAR, nationalityEN: $nationalityEN, domain: $domain, gender: $gender, lastnameAR: $lastnameAR, uuid: $uuid, acr: $acr, mobile: $mobile}';
-  }
+  String toString() =>
+      'UAEDataModel{idType: $idType, sub: $sub, spuuid: $spuuid, lastnameEN: $lastnameEN, firstnameEN: $firstnameEN, nationalityAR: $nationalityAR, idn: $idn, userType: $userType, fullnameAR: $fullnameAR, email: $email, fullnameEN: $fullnameEN, firstnameAR: $firstnameAR, nationalityEN: $nationalityEN, domain: $domain, gender: $gender, lastnameAR: $lastnameAR, uuid: $uuid, acr: $acr, mobile: $mobile}';
 }

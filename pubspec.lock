@@ -178,10 +178,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_custom_utility
-      sha256: "45da7340b5001e8c7f2507c3c665f1eeb2ffe5cff8f186c3b366433dd142de0c"
+      sha256: "3361e5e75bbaa8f0209645405225318dcada2564901a1fe5fd51b99e56da6f58"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.9"
+    version: "0.0.10"
   flutter_inappwebview:
     dependency: "direct main"
     description:

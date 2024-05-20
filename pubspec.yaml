@@ -16,7 +16,7 @@ dependencies:
   dartz: 0.10.1
   dio: ^5.4.1
   equatable: 2.0.5
-  flutter_custom_utility: ^0.0.5
+  flutter_custom_utility: ^0.0.10
   flutter_bloc: ^8.1.4
   flutter_localization: ^0.2.0
   flutter_inappwebview: ^6.0.0

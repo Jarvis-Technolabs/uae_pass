@@ -34,7 +34,7 @@ abstract class BaseApiRepo {
         statusCode = e.response!.statusCode!;
         statusMessage = LABEL_INTERNAL_SERVER_ERROR;
         if (statusCode == UN_AUTHORISED_ERROR_CODE) {
-          statusMessage = LABEL_UNAUTHORIZED_USER;
+          statusMessage = UNAUTHORISED_ERROR;
         }
       } else {
         if (e.error is SocketException) {

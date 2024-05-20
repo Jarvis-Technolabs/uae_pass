@@ -75,6 +75,9 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
                 if (state.apiStatus == PROFILE_ERROR) {
                   errorMessage = AppLocalizations.of(context)
                       .translate(UNAUTHORISED_ERROR);
+                } else if (state.apiStatus == PROFILE_ERROR_USER_TYPE_SOP1) {
+                  errorMessage = AppLocalizations.of(context)
+                      .translate(LABEL_YOUR_ACCOUNT_UNVERIFIED);
                 }
                 UAEPassWebViewResultModel uAEPassWebViewResultModel =
                     UAEPassWebViewResultModel(
@@ -213,6 +216,8 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
                   callBackUri.replace(queryParameters: queryParameter);
               latestUrl = callBackUri.toString();
             }
+
+            await CommonUtilities().launchURL(url: latestUrl);
 
             ///Todo
             // var intent = await AppAvailability.launchApp(latestUrl);

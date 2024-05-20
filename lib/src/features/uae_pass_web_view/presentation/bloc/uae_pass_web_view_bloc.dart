@@ -50,8 +50,11 @@ class UAEPassWebViewBloc
           (responseModel) async* {
             UAEDataModel model = responseModel.data;
             if (model.userType == USER_TYPE_SOP1) {
-              yield ErrorState("", PROFILE_ERROR_USER_TYPE_SOP1,
-                  uaeDataModel: model);
+              yield ErrorState(
+                "",
+                PROFILE_ERROR_USER_TYPE_SOP1,
+                uaeDataModel: model,
+              );
             } else {
               yield FetchUAEPassProfileState(uaeDataModel: model);
             }

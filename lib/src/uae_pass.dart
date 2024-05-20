@@ -9,6 +9,7 @@ class UaePass {
   late String clientId;
   late String clientSecret;
   late String redirectUrl;
+  late Locale locale;
 
   ///
   late String state;
@@ -22,6 +23,7 @@ class UaePass {
     required this.clientSecret,
     required this.redirectUrl,
     required this.state,
+    required this.locale,
     this.isProduction = true,
   });
 
@@ -42,28 +44,14 @@ class UaePass {
     }
   }
 
-  Future<void> signIn() async {
+  Future<UAEPassWebViewResultModel> signIn() async {
     await setUpEnvironment();
-    UAEPassWebViewResultModel model = await Navigator.push(
+    UAEPassWebViewResultModel uaePassWebViewResultModel = await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (BuildContext context) => const UAEPassWebViewPage(),
       ),
     );
-    if (model.status) {
-      ///todo: return model data
-    } else {
-      // if (model.errorType == PROFILE_ERROR_USER_TYPE_SOP1) {
-      //   await stateErrorWithChild(
-      //       ApiErrorState(model.message, model.errorType, shouldGoBack: false),
-      //       child: UAEPassMessageText(screenUtil, appColors),
-      //       shouldGoBack: false);
-      // } else {
-      //   await stateErrorWithChild(
-      //       ApiErrorState(model.message, model.errorType, shouldGoBack: false),
-      //       errorMessage: model.message,
-      //       shouldGoBack: false);
-      // }
-    }
+    return uaePassWebViewResultModel;
   }
 }
