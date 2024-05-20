@@ -16,7 +16,7 @@ class Flavour {
       androidPackageId: "ae.uaepass.mainapp.stg",
       iosBundleSchema: "uaepassstg://",
       cancelledUrl: "com.mims.test://uaepass",
-      certificatePath: "assets/cert/qa_uaepass.pem",
+      certificatePath: "packages/uae_pass/assets/cert/qa_uaepass.pem",
     );
   }
 
@@ -36,7 +36,7 @@ class Flavour {
       androidPackageId: "ae.uaepass.mainapp",
       iosBundleSchema: "uaepass://",
       cancelledUrl: "https://ids.uaepass.ae/authenticationendpoint/retry.do",
-      certificatePath: "assets/cert/prod_uaepass.pem",
+      certificatePath: "packages/uae_pass/assets/cert/prod_uaepass.pem",
     );
   }
 }

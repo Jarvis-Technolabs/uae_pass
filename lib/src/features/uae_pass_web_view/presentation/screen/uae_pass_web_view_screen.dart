@@ -25,7 +25,7 @@ class UAEPassWebViewScreen extends StatefulWidget {
 }
 
 class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
-  late InAppWebViewController webView;
+  InAppWebViewController? webView;
 
   StreamController<bool> showLoadingStreamController =
       StreamController<bool>.broadcast();
@@ -44,8 +44,8 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
   @override
   Widget build(BuildContext context) => PopScope(
         onPopInvoked: (bool didPop) async {
-          if (await webView.canGoBack()) {
-            await webView.goBack();
+          if (webView != null && await webView!.canGoBack()) {
+            await webView!.goBack();
           } else {
             await onClickBack();
           }
@@ -163,7 +163,7 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
         onLoadStop: (InAppWebViewController controller, Uri? url) async {},
         onCreateWindow:
             (controller, CreateWindowAction createWindowAction) async {
-          await webView.loadUrl(urlRequest: createWindowAction.request);
+          await webView?.loadUrl(urlRequest: createWindowAction.request);
           return false;
         },
         shouldOverrideUrlLoading: (InAppWebViewController controller,

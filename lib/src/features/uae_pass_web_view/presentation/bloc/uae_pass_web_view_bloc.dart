@@ -11,26 +11,20 @@ import 'uae_pass_web_view_state.dart';
 
 class UAEPassWebViewBloc
     extends Bloc<UAEPassWebViewEvent, UAEPassWebViewState> {
-  UAEPassWebViewBloc() : super(UAEPassWebViewInitialState());
-
   UaePassRepo? uaePassRepo = sl();
 
-  Stream<UAEPassWebViewState> mapEventToState(
-    UAEPassWebViewEvent event,
-  ) async* {
-    if (event is FetchUAEPassProfileEvent) {
-      yield* fetchUAEPassProfile(event.accessToken);
-    } else if (event is SetUAEPassLoginAuthenticationUrlEvent) {
-      yield SetUAEPassLoginAuthenticationUrlState(
-          authenticationUrl: event.authenticationUrl);
-    } else if (event is ErrorEvent) {
-      yield ErrorState(event.error, event.apiStatus);
-    }
+  UAEPassWebViewBloc() : super(UAEPassWebViewInitialState()) {
+    on<FetchUAEPassProfileEvent>(fetchUAEPassProfile);
+    on<SetUAEPassLoginAuthenticationUrlEvent>(setUAEPassLoginAuthenticationUrl);
+    on<ErrorEvent>(errorEvent);
   }
 
-  Stream<UAEPassWebViewState> fetchUAEPassProfile(String accessToken) async* {
+  Stream<UAEPassWebViewState> fetchUAEPassProfile(
+    FetchUAEPassProfileEvent fetchUAEPassProfileEvent,
+    Emitter<UAEPassWebViewState> emit,
+  ) async* {
     UAEPassAccessToken uaePassAccessToken = UAEPassAccessToken(
-      code: accessToken,
+      code: fetchUAEPassProfileEvent.accessToken,
       grant_type: KEY_AUTHORIZATION_CODE,
       redirect_uri: FlavourConfig.instance.redirectUrl,
     );
@@ -61,6 +55,30 @@ class UAEPassWebViewBloc
           },
         );
       },
+    );
+  }
+
+  Stream<UAEPassWebViewState> setUAEPassLoginAuthenticationUrl(
+    SetUAEPassLoginAuthenticationUrlEvent setUAEPassLoginAuthenticationUrlEvent,
+    Emitter<UAEPassWebViewState> emit,
+  ) async* {
+    emit(
+      SetUAEPassLoginAuthenticationUrlState(
+        authenticationUrl:
+            setUAEPassLoginAuthenticationUrlEvent.authenticationUrl,
+      ),
+    );
+  }
+
+  Stream<UAEPassWebViewState> errorEvent(
+    ErrorEvent errorEvent,
+    Emitter<UAEPassWebViewState> emit,
+  ) async* {
+    emit(
+      ErrorState(
+        errorEvent.error,
+        errorEvent.apiStatus,
+      ),
     );
   }
 }
