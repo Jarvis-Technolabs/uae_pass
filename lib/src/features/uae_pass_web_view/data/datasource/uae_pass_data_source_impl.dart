@@ -8,10 +8,10 @@ import 'package:uae_pass/src/features/uae_pass_web_view/data/models/uae_pass_acc
 
 import 'uae_pass_data_source.dart';
 
-class AccountInfoDataSourceImpl extends UaePassDataSource {
+class UaePassDataSourceImpl extends UaePassDataSource {
   late final IRemoteDataSource remoteDataSource;
 
-  AccountInfoDataSourceImpl({required this.remoteDataSource});
+  UaePassDataSourceImpl({required this.remoteDataSource});
 
   @override
   Future<ApiResponse> callUAEPassAccessToken(

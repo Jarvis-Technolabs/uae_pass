@@ -13,8 +13,10 @@ class UaePassRepoImpl extends UaePassRepo {
   late final UaePassDataSource uaePassDataSource;
   late final NetworkInfo networkInfo;
 
-  UaePassRepoImpl(this.uaePassDataSource, this.networkInfo)
-      : super(networkInfo);
+  UaePassRepoImpl({
+    required this.uaePassDataSource,
+    required this.networkInfo,
+  }) : super(networkInfo);
 
   @override
   Future<Either<Failure, Success>> callUAEPassAccessToken(

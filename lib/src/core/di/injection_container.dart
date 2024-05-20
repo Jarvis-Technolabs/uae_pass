@@ -4,6 +4,9 @@ import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 import 'package:uae_pass/src/core/di/prod_di_getter.dart';
 import 'package:uae_pass/src/core/util/common_utilities.dart';
+import 'package:uae_pass/src/features/uae_pass_web_view/data/datasource/uae_pass_data_source.dart';
+import 'package:uae_pass/src/features/uae_pass_web_view/data/datasource/uae_pass_data_source_impl.dart';
+import 'package:uae_pass/src/features/uae_pass_web_view/domain/uae_pass_repo.dart';
 
 import '../api/data_source/network_info/network_info.dart';
 import '../api/data_source/network_info/network_info_impl.dart';
@@ -20,7 +23,7 @@ import 'mock_di_getter.dart';
 final sl = GetIt.instance;
 
 /// change as per requirements of mock data/prod data
-const choice = Choice.MOCK_DATA;
+const choice = Choice.PROD_DATA;
 
 ///init
 Future<void> init() async {
@@ -56,4 +59,13 @@ Future<void> init() async {
   Dio dio = Dio();
   dio.interceptors.add(ApiCallLogPrinterInterceptors());
   sl.registerSingleton<Dio>(dio);
+
+  ///UAE Pass
+  sl.registerLazySingleton<UaePassRepo>(() => getter.getUaePassRepo());
+
+  sl.registerLazySingleton<UaePassDataSource>(
+    () => UaePassDataSourceImpl(
+      remoteDataSource: sl(),
+    ),
+  );
 }

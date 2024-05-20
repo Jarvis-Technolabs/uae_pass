@@ -32,4 +32,5 @@ dev_dependencies:
 
 flutter:
   assets:
-    - assets/cert/
+    - assets/cert/qa_uaepass.pem
+    - assets/cert/prod_uaepass.pem

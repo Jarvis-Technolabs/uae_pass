@@ -36,8 +36,8 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
   String currentStateForUAEPassLogin = FlavourConfig.instance.state;
 
   @override
-  void initState() async {
-    await createUrl();
+  void initState() {
+    createUrl();
     super.initState();
   }
 
