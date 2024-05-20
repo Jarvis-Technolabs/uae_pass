@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:uae_pass/src/core/di/injection_container.dart';
 import 'package:uae_pass/src/core/flavour/flavour.dart';
 import 'package:uae_pass/src/features/uae_pass_web_view/data/models/uae_pass_web_view_result_model.dart';
+import 'package:uae_pass/src/features/uae_pass_web_view/data/repository/uae_pass_repo_impl.dart';
 import 'package:uae_pass/src/features/uae_pass_web_view/presentation/uae_pass_web_view_page.dart';
 
 class UaePass {
   late BuildContext context;
-  late String clientId;
-  late String clientSecret;
+  late String? clientId;
+  late String? clientSecret;
   late String redirectUrl;
-  late Locale locale;
 
   ///
   late String state;
@@ -19,23 +19,33 @@ class UaePass {
 
   UaePass({
     required this.context,
-    required this.clientId,
-    required this.clientSecret,
+    this.clientId,
+    this.clientSecret,
     required this.redirectUrl,
     required this.state,
-    required this.locale,
     this.isProduction = true,
   });
 
   Future<void> setUpEnvironment() async {
-    await init();
+    if (!sl.isRegistered<UaePassRepoImpl>(instanceName: "UaePassRepo")) {
+      await init();
+    }
     if (isProduction) {
-      Flavour.setProdFlavor(
-        clientId: clientId,
-        clientSecret: clientSecret,
-        redirectUrl: redirectUrl,
-        state: state,
-      );
+      if (clientId == null || clientSecret == null) {
+        throw StateError(
+            "'clientId' and 'clientSecret' are required for production.");
+      } else if (clientId == null) {
+        throw StateError("'clientId' is required for production.");
+      } else if (clientSecret == null) {
+        throw StateError("'clientSecret' is required for production.");
+      } else {
+        Flavour.setProdFlavor(
+          clientId: clientId!,
+          clientSecret: clientSecret!,
+          redirectUrl: redirectUrl,
+          state: state,
+        );
+      }
     } else {
       Flavour.setStagingFlavor(
         redirectUrl: redirectUrl,
@@ -44,9 +54,9 @@ class UaePass {
     }
   }
 
-  Future<UAEPassWebViewResultModel> signIn() async {
+  Future<UAEPassWebViewResultModel?> signIn() async {
     await setUpEnvironment();
-    UAEPassWebViewResultModel uaePassWebViewResultModel = await Navigator.push(
+    UAEPassWebViewResultModel? uaePassWebViewResultModel = await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (BuildContext context) => const UAEPassWebViewPage(),

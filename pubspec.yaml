@@ -34,3 +34,5 @@ flutter:
   assets:
     - assets/cert/qa_uaepass.pem
     - assets/cert/prod_uaepass.pem
+    - assets/lang/lang_en.json
+    - assets/lang/lang_ar.json

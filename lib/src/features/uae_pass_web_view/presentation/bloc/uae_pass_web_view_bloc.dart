@@ -19,10 +19,10 @@ class UAEPassWebViewBloc
     on<ErrorEvent>(errorEvent);
   }
 
-  Stream<UAEPassWebViewState> fetchUAEPassProfile(
+  Future<void> fetchUAEPassProfile(
     FetchUAEPassProfileEvent fetchUAEPassProfileEvent,
     Emitter<UAEPassWebViewState> emit,
-  ) async* {
+  ) async {
     UAEPassAccessToken uaePassAccessToken = UAEPassAccessToken(
       code: fetchUAEPassProfileEvent.accessToken,
       grant_type: KEY_AUTHORIZATION_CODE,
@@ -30,27 +30,33 @@ class UAEPassWebViewBloc
     );
     final output =
         await uaePassRepo!.callUAEPassAccessToken(uaePassAccessToken);
-    yield* output.fold(
-      (failure) async* {
-        yield ErrorState("", PROFILE_ERROR);
+    await output.fold(
+      (failure) async {
+        emit(ErrorState("", PROFILE_ERROR));
       },
-      (responseToken) async* {
+      (responseToken) async {
         final userDataOutput =
             await uaePassRepo!.getUserData(responseToken.data);
-        yield* userDataOutput.fold(
-          (failure) async* {
-            yield ErrorState("", PROFILE_ERROR);
+        await userDataOutput.fold(
+          (failure) async {
+            emit(ErrorState("", PROFILE_ERROR));
           },
-          (responseModel) async* {
+          (responseModel) async {
             UAEDataModel model = responseModel.data;
             if (model.userType == USER_TYPE_SOP1) {
-              yield ErrorState(
-                "",
-                PROFILE_ERROR_USER_TYPE_SOP1,
-                uaeDataModel: model,
+              emit(
+                ErrorState(
+                  "",
+                  PROFILE_ERROR_USER_TYPE_SOP1,
+                  uaeDataModel: model,
+                ),
               );
             } else {
-              yield FetchUAEPassProfileState(uaeDataModel: model);
+              emit(
+                FetchUAEPassProfileState(
+                  uaeDataModel: model,
+                ),
+              );
             }
           },
         );
@@ -58,10 +64,10 @@ class UAEPassWebViewBloc
     );
   }
 
-  Stream<UAEPassWebViewState> setUAEPassLoginAuthenticationUrl(
+  Future<void> setUAEPassLoginAuthenticationUrl(
     SetUAEPassLoginAuthenticationUrlEvent setUAEPassLoginAuthenticationUrlEvent,
     Emitter<UAEPassWebViewState> emit,
-  ) async* {
+  ) async {
     emit(
       SetUAEPassLoginAuthenticationUrlState(
         authenticationUrl:
@@ -70,10 +76,10 @@ class UAEPassWebViewBloc
     );
   }
 
-  Stream<UAEPassWebViewState> errorEvent(
+  Future<void> errorEvent(
     ErrorEvent errorEvent,
     Emitter<UAEPassWebViewState> emit,
-  ) async* {
+  ) async {
     emit(
       ErrorState(
         errorEvent.error,

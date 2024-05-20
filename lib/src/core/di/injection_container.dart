@@ -20,7 +20,7 @@ import 'di_getter.dart';
 import 'mock_di_getter.dart';
 
 ///Service locator
-final sl = GetIt.instance;
+final GetIt sl = GetIt.instance;
 
 /// change as per requirements of mock data/prod data
 const choice = Choice.PROD_DATA;
