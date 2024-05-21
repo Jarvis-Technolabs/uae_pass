@@ -15,3 +15,6 @@ String UAE_PASS_ANDROID_APP_LINK =
 const String UAE_PASS_KIOSK_LOCATIONS = "https://selfcare.uaepass.ae/locations";
 const String UAE_PASS_SP = "tel://800555";
 const String UAE_PASS_SP_NAME = "800555";
+
+/// Font
+const String FONT_FAMILY_GE_FLOW = 'GEFlow';

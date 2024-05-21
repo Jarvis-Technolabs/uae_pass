@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:uae_pass/src/core/const/asset_constants.dart';
 
 class UaePassAppLocalizations {
   final Locale locale;
@@ -19,10 +20,8 @@ class UaePassAppLocalizations {
   late Map<String, String> _localizedStrings;
 
   Future<bool> load() async {
-    // String jsonString = await rootBundle
-    //     .loadString('packages/uae_pass/lang/lang_${locale.languageCode}.json');
-    ByteData bytes = await rootBundle
-        .load('packages/uae_pass/assets/lang/lang_${locale.languageCode}.json');
+    ByteData bytes =
+        await rootBundle.load('${LANG_PATH}lang_${locale.languageCode}.json');
     String jsonString = utf8.decode(bytes.buffer.asUint8List());
 
     Map<String, dynamic> jsonMap = json.decode(jsonString);

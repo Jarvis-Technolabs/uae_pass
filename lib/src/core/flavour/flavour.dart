@@ -1,3 +1,4 @@
+import 'package:uae_pass/src/core/const/asset_constants.dart';
 import 'package:uae_pass/src/core/flavour/flavour_config.dart';
 import 'package:uae_pass/src/core/flavour/flavour_enum.dart';
 
@@ -16,7 +17,7 @@ class Flavour {
       androidPackageId: "ae.uaepass.mainapp.stg",
       iosBundleSchema: "uaepassstg://",
       cancelledUrl: "com.mims.test://uaepass",
-      certificatePath: "packages/uae_pass/assets/cert/qa_uaepass.pem",
+      certificatePath: "${CERTIFICATE_PATH}qa_uaepass.pem",
     );
   }
 
@@ -36,7 +37,7 @@ class Flavour {
       androidPackageId: "ae.uaepass.mainapp",
       iosBundleSchema: "uaepass://",
       cancelledUrl: "https://ids.uaepass.ae/authenticationendpoint/retry.do",
-      certificatePath: "packages/uae_pass/assets/cert/prod_uaepass.pem",
+      certificatePath: "${CERTIFICATE_PATH}prod_uaepass.pem",
     );
   }
 }

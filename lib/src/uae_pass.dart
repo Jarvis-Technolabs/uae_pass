@@ -14,7 +14,7 @@ class UaePass {
   ///
   late String state;
 
-  /// set to false for sandbox
+  /// set to false for sandbox, Default is true
   bool isProduction = true;
 
   UaePass({

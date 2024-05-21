@@ -36,3 +36,11 @@ flutter:
     - assets/cert/prod_uaepass.pem
     - assets/lang/lang_en.json
     - assets/lang/lang_ar.json
+    - assets/images/
+    - assets/images/icons/
+
+  fonts:
+    - family: GEFlow
+      fonts:
+        - asset: assets/fonts/GEFlow.otf
+        - asset: assets/fonts/GEFlowBold.otf
