@@ -186,13 +186,13 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
               /// check if url define to redirect in uae pass app or web otherwise send in else part
               if (url.contains(DIGITAL_ID_URL_APP)) {
                 /// check if uae pass production app and in android
-                // if (!FlavourConfig.isProd()) {
-                /// replace android schema with android staging schema for uae pass app
-                //   url = url.replaceAll(UAE_PASS_ANDROID_PROD_BUNDLE_ID,
-                //       UAE_PASS_ANDROID_STAGING_BUNDLE_ID);
-                // }
+                if (!FlavourConfig.isProd()) {
+                  /// replace android schema with android staging schema for uae pass app
+                  url = url.replaceAll(UAE_PASS_ANDROID_PROD_BUNDLE_ID,
+                      UAE_PASS_ANDROID_STAGING_BUNDLE_ID);
+                }
 
-                /// get successurl or failureurl for loading when authorization is successfully
+                /// get success url or failure url for loading when authorization is successfully
                 successUrl = CommonUtilities()
                     .getQueryParameterValue(KEY_SUCCESS_URL, WebUri(url));
                 failureUrl = CommonUtilities()

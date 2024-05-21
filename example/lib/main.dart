@@ -56,6 +56,9 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: UaePassButton(
+              customBorderRadius: 10,
+              isBorder: true,
+              buttonShape: ButtonShape.customRadius,
               onPressed: () async {
                 UAEPassWebViewResultModel? uaePassWebViewResultModel =
                     await uaeSignIn(context: context);
@@ -71,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
       await UaePass(
         context: context,
         redirectUrl: 'https://pftmapp.pension.gov.ae/uaepass.aspx',
-        state: '123123213',
+        state: 'rV7NIs43uxZKGqc537yuVN08',
         isProduction: false,
       ).signIn();
 }

@@ -61,6 +61,8 @@ const String KEY_CONTENT_TYPE = "Content-Type";
 const String KEY_AUTHORIZATION_CODE = "authorization_code";
 const String KEY_CLIENT_ID = "client_id";
 const String KEY_CLIENT_SECRET = "client_secret";
+const String UAE_PASS_ANDROID_PROD_BUNDLE_ID = "uaepass://";
+const String UAE_PASS_ANDROID_STAGING_BUNDLE_ID = "uaepassstg://";
 
 // web api error type
 const int RESULT_OK = 200;
