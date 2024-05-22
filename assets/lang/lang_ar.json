@@ -5,5 +5,7 @@
   "timeout_error_message": "استغرق معالجة طلبك وقتًا أطول من المتوقع، يرجى المحاولة مرة أخرى في وقت لاحق",
   "label_your_account_unverified": "حسابك غير معرف، الرجاء زيارة أقرب ",
   "something_went_wrong": "هناك خطأ ما. من فضلك حاول مرة أخرى بعد بعض من الوقت",
-  "internet_connection_error": "يرجى التحقق من الاتصال بالإنترنت"
+  "internet_connection_error": "يرجى التحقق من الاتصال بالإنترنت",
+  "login_with_uae_pass": "تسجيل الدخول بالهوية الرقمية",
+  "sign_in_with_uae_pass": "تسجيل الدخول بالهوية الرقمية"
 }

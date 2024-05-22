@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:uae_pass/src/core/const/app_constants.dart';
 import 'package:uae_pass/src/core/const/asset_constants.dart';
 
 class UaePassAppLocalizations {
@@ -39,7 +40,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) {
-    return ['en', 'ar'].contains(locale.languageCode);
+    return [EN, AR].contains(locale.languageCode);
   }
 
   @override

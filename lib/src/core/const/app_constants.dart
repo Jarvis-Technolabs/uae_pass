@@ -18,3 +18,7 @@ const String UAE_PASS_SP_NAME = "800555";
 
 /// Font
 const String FONT_FAMILY_GE_FLOW = 'GEFlow';
+
+/// Language
+const String EN = 'en';
+const String AR = 'ar';

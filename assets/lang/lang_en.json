@@ -5,5 +5,7 @@
   "timeout_error_message": "Processing your request took longer than expected, please try again later",
   "label_your_account_unverified": "Your account is unverified, please visit the nearest UAE PASS",
   "something_went_wrong": "Something went wrong. Please try again after sometime",
-  "internet_connection_error": "Please check internet connection"
+  "internet_connection_error": "Please check internet connection",
+  "login_with_uae_pass": "Login with UAE PASS",
+  "sign_in_with_uae_pass": "Sign in with UAE PASS"
 }

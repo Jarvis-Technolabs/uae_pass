@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: UaePassButton(
+            child: LoginWithUaePassButton(
               customBorderRadius: 10,
               isBorder: true,
               buttonShape: ButtonShape.customRadius,
