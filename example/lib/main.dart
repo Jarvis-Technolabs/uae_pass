@@ -12,6 +12,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
+        supportedLocales: [
+          Locale('en'),
+          Locale('ar'),
+        ],
         localizationsDelegates: [
           UaePassAppLocalizations.delegate,
         ],
