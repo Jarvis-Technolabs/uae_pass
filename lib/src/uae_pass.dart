@@ -26,7 +26,7 @@ class UaePass {
     this.isProduction = true,
   });
 
-  Future<void> setUpEnvironment() async {
+  Future<void> _setUpEnvironment() async {
     if (!sl.isRegistered<UaePassRepoImpl>(instanceName: "UaePassRepo")) {
       await init();
     }
@@ -55,7 +55,7 @@ class UaePass {
   }
 
   Future<UAEPassWebViewResultModel?> signIn() async {
-    await setUpEnvironment();
+    await _setUpEnvironment();
     UAEPassWebViewResultModel? uaePassWebViewResultModel = await Navigator.push(
       context,
       MaterialPageRoute(
