@@ -19,9 +19,13 @@ class FetchUAEPassProfileState extends UAEPassWebViewState {
 }
 
 class ErrorState extends UAEPassWebViewState {
-  final String? error;
+  final String? errorMessage;
   final int apiStatus;
   final UAEDataModel? uaeDataModel;
 
-  ErrorState(this.error, this.apiStatus, {this.uaeDataModel});
+  ErrorState(
+    this.errorMessage,
+    this.apiStatus, {
+    this.uaeDataModel,
+  });
 }

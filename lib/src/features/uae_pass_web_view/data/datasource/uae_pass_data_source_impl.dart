@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:uae_pass/src/core/api/data_source/remote_ds/remote_ds.dart';
-import 'package:uae_pass/src/core/api/model/api_response.dart';
 import 'package:uae_pass/src/core/const/api_constants.dart';
 import 'package:uae_pass/src/core/flavour/flavour_config.dart';
 import 'package:uae_pass/src/features/uae_pass_web_view/data/models/uae_pass_access_token.dart';
@@ -14,7 +13,7 @@ class UaePassDataSourceImpl extends UaePassDataSource {
   UaePassDataSourceImpl({required this.remoteDataSource});
 
   @override
-  Future<ApiResponse> callUAEPassAccessToken(
+  Future<dynamic> callUAEPassAccessToken(
           UAEPassAccessToken uaePassAccessToken) =>
       remoteDataSource.executePost(
         path: UAE_PASS_TOKEN_URL,
@@ -25,7 +24,7 @@ class UaePassDataSourceImpl extends UaePassDataSource {
       );
 
   @override
-  Future<ApiResponse> getUserData(String accessToken) =>
+  Future<dynamic> getUserData(String accessToken) =>
       remoteDataSource.executeGet(
         path: UAE_PASS_PROFILE_URL,
         token: "Bearer $accessToken",

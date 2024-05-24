@@ -12,11 +12,11 @@ const int UN_AUTHORISED_ERROR_CODE = 401;
 const String SOCKET_EXCEPTION = "SocketException";
 
 ///Header key and values
-const String CONTENT_TYPE = "content-Type";
+const String CONTENT_TYPE = "content-type";
 const String ACCEPT = "Accept";
 const String APPLICATION_JSON_CONTENT_TYPE = 'application/json';
 const String APPLICATION_X_WWW_URL_FORM_URL_ENCODED_CONTENT_TYPE =
-    "application/x-www-form-urlencoded; charset=UTF-8";
+    "application/x-www-form-urlencoded";
 
 ///=========================================================================///
 

@@ -56,7 +56,7 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
             } else if (state is FetchUAEPassProfileState) {
               /// UAE Pass login -> fetch uae pass profile data
 
-              await InAppWebViewController.clearAllCache();
+              await webView?.clearCache();
               UAEPassWebViewResultModel uAEPassWebViewResultModel =
                   UAEPassWebViewResultModel(
                 status: (state.uaeDataModel.userType != USER_TYPE_SOP1),
@@ -66,14 +66,16 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
               goBack(context, result: uAEPassWebViewResultModel);
             } else if (state is ErrorState) {
               /// Error
-              await InAppWebViewController.clearAllCache();
-              String? errorMessage = state.error;
+              await webView?.clearCache();
+              String? errorMessage = state.errorMessage;
               if (state.apiStatus == PROFILE_ERROR) {
                 errorMessage = UaePassAppLocalizations.of(context)
                     .translate(UNAUTHORISED_ERROR);
               } else if (state.apiStatus == PROFILE_ERROR_USER_TYPE_SOP1) {
                 errorMessage = UaePassAppLocalizations.of(context)
                     .translate(LABEL_YOUR_ACCOUNT_UNVERIFIED);
+              } else {
+                errorMessage = state.errorMessage;
               }
               UAEPassWebViewResultModel uAEPassWebViewResultModel =
                   UAEPassWebViewResultModel(
@@ -140,7 +142,7 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
         errorType: USER_CANCELLED,
         message:
             UaePassAppLocalizations.of(context).translate(LABEL_USER_CANCEL));
-    await InAppWebViewController.clearAllCache();
+    await webView?.clearCache();
     routeStreamController.add(true);
     Navigator.of(context).pop(model);
     return true;
@@ -264,10 +266,13 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
                   return NavigationActionPolicy.ALLOW;
                 }
               } else if (url.startsWith(FlavourConfig.instance.cancelledUrl)) {
-                BlocProvider.of<UAEPassWebViewBloc>(context).add(ErrorEvent(
+                BlocProvider.of<UAEPassWebViewBloc>(context).add(
+                  ErrorEvent(
                     UaePassAppLocalizations.of(context)
                         .translate(LABEL_USER_CANCEL),
-                    USER_CANCELLED));
+                    USER_CANCELLED,
+                  ),
+                );
                 return NavigationActionPolicy.ALLOW;
               } else {
                 /// check if url start with redirect url
@@ -323,7 +328,7 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
   @override
   void dispose() async {
     super.dispose();
-    showLoadingStreamController.close();
+    //showLoadingStreamController.close();
     await GetIt.instance.reset();
   }
 

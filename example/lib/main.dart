@@ -52,18 +52,40 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           centerTitle: true,
         ),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: LoginWithUaePassButton(
-              customBorderRadius: 10,
-              isBorder: true,
-              buttonShape: ButtonShape.customRadius,
-              onPressed: () async {
-                UAEPassWebViewResultModel? uaePassWebViewResultModel =
-                    await uaeSignIn(context: context);
-              },
-            ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 18.0,
+            vertical: 20.0,
+          ),
+          child: Column(
+            children: [
+              Center(
+                child: LoginWithUaePassButton(
+                  customBorderRadius: 10,
+                  isBorder: true,
+                  buttonShape: ButtonShape.customRadius,
+                  onPressed: () async {
+                    UAEPassWebViewResultModel? uaePassWebViewResultModel =
+                        await uaeSignIn(context: context);
+                    print(
+                        "UaePassWebViewResultModel: ${uaePassWebViewResultModel.toString()}");
+                  },
+                ),
+              ),
+              SizedBox(
+                height: 12.0,
+              ),
+              Center(
+                child: LogoButton(
+                  isBorder: true,
+                  buttonShape: ButtonShape.defaultCornerRadius,
+                  onPressed: () async {
+                    UAEPassWebViewResultModel? uaePassWebViewResultModel =
+                        await uaeSignIn(context: context);
+                  },
+                ),
+              ),
+            ],
           ),
         ),
       );
@@ -74,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
       await UaePass(
         context: context,
         redirectUrl: 'https://pftmapp.pension.gov.ae/uaepass.aspx',
-        state: 'rV7NIs43uxZKGqc537yuVN08',
+        state: 'y3m9etA74PQ2yqI73TdVRo6M',
         isProduction: false,
       ).signIn();
 }

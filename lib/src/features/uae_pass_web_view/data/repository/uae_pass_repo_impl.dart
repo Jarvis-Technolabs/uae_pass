@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:uae_pass/src/core/api/data_source/network_info/network_info.dart';
-import 'package:uae_pass/src/core/api/model/api_response.dart';
 import 'package:uae_pass/src/core/api/model/failure.dart';
 import 'package:uae_pass/src/core/api/model/success.dart';
 import 'package:uae_pass/src/core/const/api_constants.dart';
@@ -25,12 +24,15 @@ class UaePassRepoImpl extends UaePassRepo {
 
   Future<Either<Failure, Success>> callUAEPassAccessTokenAPI(
       UAEPassAccessToken uaePassAccessToken) async {
-    ApiResponse response =
+    dynamic response =
         await uaePassDataSource.callUAEPassAccessToken(uaePassAccessToken);
-    if (!response.status!) {
-      return Left(ServerFailure(
+    if (response.statusCode != 200) {
+      return Left(
+        ServerFailure(
           errorMessage: response.message!,
-          statusCode: response.statusCode ?? 0));
+          statusCode: response.statusCode ?? 0,
+        ),
+      );
     } else {
       return Right(
         Success(
@@ -45,8 +47,8 @@ class UaePassRepoImpl extends UaePassRepo {
       baseApiMethod(() => getUserDataAPI(accessToken));
 
   Future<Either<Failure, Success>> getUserDataAPI(String accessToken) async {
-    ApiResponse response = await uaePassDataSource.getUserData(accessToken);
-    if (!response.status!) {
+    dynamic response = await uaePassDataSource.getUserData(accessToken);
+    if (response.statusCode != 200) {
       return Left(
         ServerFailure(
           errorMessage: response.message!,

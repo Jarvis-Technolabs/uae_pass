@@ -32,14 +32,24 @@ class UAEPassWebViewBloc
         await uaePassRepo!.callUAEPassAccessToken(uaePassAccessToken);
     await output.fold(
       (failure) async {
-        emit(ErrorState("", PROFILE_ERROR));
+        emit(
+          ErrorState(
+            failure.errorMessage,
+            failure.statusCode,
+          ),
+        );
       },
       (responseToken) async {
         final userDataOutput =
             await uaePassRepo!.getUserData(responseToken.data);
         await userDataOutput.fold(
           (failure) async {
-            emit(ErrorState("", PROFILE_ERROR));
+            emit(
+              ErrorState(
+                failure.errorMessage,
+                failure.statusCode,
+              ),
+            );
           },
           (responseModel) async {
             UAEDataModel model = responseModel.data;
