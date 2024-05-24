@@ -95,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }) async =>
       await UaePass(
         context: context,
-        redirectUrl: 'https://pftmapp.pension.gov.ae/uaepass.aspx',
+        redirectUrl: 'https://com.example',
         state: 'y3m9etA74PQ2yqI73TdVRo6M',
         isProduction: false,
       ).signIn();

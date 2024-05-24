@@ -1,4 +1,4 @@
-package ae.gov.pensionfund
+package com.example
 
 import io.flutter.embedding.android.FlutterActivity
 
