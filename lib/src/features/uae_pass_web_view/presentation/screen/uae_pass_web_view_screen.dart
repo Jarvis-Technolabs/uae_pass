@@ -19,7 +19,11 @@ import '../bloc/uae_pass_web_view_event.dart';
 import '../bloc/uae_pass_web_view_state.dart';
 
 class UAEPassWebViewScreen extends StatefulWidget {
-  const UAEPassWebViewScreen({super.key});
+  final bool isDarkMode;
+  const UAEPassWebViewScreen({
+    super.key,
+    this.isDarkMode = false,
+  });
 
   @override
   UAEPassWebViewScreenState createState() => UAEPassWebViewScreenState();
@@ -162,6 +166,7 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
           },
           child: InAppWebView(
             initialSettings: InAppWebViewSettings(
+              forceDark: widget.isDarkMode ? ForceDark.ON : ForceDark.OFF,
               useShouldOverrideUrlLoading: true,
               useOnLoadResource: true,
               useHybridComposition: true,

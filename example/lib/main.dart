@@ -371,5 +371,6 @@ class _MyHomePageState extends State<MyHomePage> {
         redirectUrl: 'https://com.example',
         state: 'y3m9etA74PQ2yqI73TdVRo6M',
         isProduction: false,
+        isDarkMode: isDarkMode,
       ).signIn();
 }

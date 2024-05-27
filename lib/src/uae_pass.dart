@@ -16,6 +16,7 @@ class UaePass {
 
   /// set to false for sandbox, Default is true
   bool isProduction = true;
+  bool isDarkMode = false;
 
   UaePass({
     required this.context,
@@ -24,6 +25,7 @@ class UaePass {
     required this.redirectUrl,
     required this.state,
     this.isProduction = true,
+    this.isDarkMode = false,
   });
 
   Future<void> _setUpEnvironment() async {
@@ -59,7 +61,9 @@ class UaePass {
     UAEPassWebViewResultModel? uaePassWebViewResultModel = await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (BuildContext context) => const UAEPassWebViewPage(),
+        builder: (BuildContext context) => UAEPassWebViewPage(
+          isDarkMode: isDarkMode,
+        ),
       ),
     );
     return uaePassWebViewResultModel;
