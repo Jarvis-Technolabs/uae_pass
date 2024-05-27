@@ -21,7 +21,7 @@ class LogoButton extends StatelessWidget {
     this.buttonShape = ButtonShape.defaultCornerRadius,
     this.isDarkMode = false,
     this.isButtonMaxWidth = false,
-    this.isBorder = false,
+    this.isBorder = true,
     this.isDisable = false,
   });
 
@@ -39,15 +39,27 @@ class LogoButton extends StatelessWidget {
                   vertical: 12.0,
                 ),
             foregroundColor: Colors.white,
-            backgroundColor: Colors.white,
+            backgroundColor: isDisable
+                ? Colors.white
+                : isDarkMode
+                    ? Colors.black
+                    : Colors.white,
             splashFactory: InkRipple.splashFactory,
             minimumSize: Size(
               30.0,
               30.0,
             ),
+            side: BorderSide(
+              color: isBorder ? Colors.black : Colors.transparent,
+            ),
           ),
           onPressed: isDisable ? null : onPressed,
-          child: UAE_PASS_ICON.getImage(
+          child: (isDisable
+                  ? DISABLED_UAE_PASS_ICON
+                  : isDarkMode
+                      ? DARK_UAE_PASS_ICON
+                      : LIGHT_UAE_PASS_ICON)
+              .getImage(
             height: 30.0,
             width: 30.0,
           ),

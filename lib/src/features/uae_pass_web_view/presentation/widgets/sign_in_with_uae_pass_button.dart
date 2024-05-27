@@ -24,7 +24,7 @@ class SignInWithUaePassButton extends StatelessWidget {
     this.buttonShape = ButtonShape.defaultCornerRadius,
     this.isDarkMode = false,
     this.isButtonMaxWidth = false,
-    this.isBorder = false,
+    this.isBorder = true,
     this.isDisable = false,
   });
 
@@ -42,8 +42,15 @@ class SignInWithUaePassButton extends StatelessWidget {
                   vertical: 10.0,
                 ),
             foregroundColor: Colors.white,
-            backgroundColor: Colors.white,
+            backgroundColor: isDisable
+                ? Colors.white
+                : isDarkMode
+                    ? Colors.black
+                    : Colors.white,
             splashFactory: InkRipple.splashFactory,
+            side: BorderSide(
+              color: isBorder ? Colors.black : Colors.transparent,
+            ),
           ),
           onPressed: isDisable ? null : onPressed,
           child: Row(
@@ -51,7 +58,12 @@ class SignInWithUaePassButton extends StatelessWidget {
             mainAxisSize:
                 isButtonMaxWidth ? MainAxisSize.max : MainAxisSize.min,
             children: [
-              UAE_PASS_ICON.getImage(),
+              (isDisable
+                      ? DISABLED_UAE_PASS_ICON
+                      : isDarkMode
+                          ? DARK_UAE_PASS_ICON
+                          : LIGHT_UAE_PASS_ICON)
+                  .getImage(),
               SizedBox(
                 width: 8.0,
               ),
@@ -59,7 +71,11 @@ class SignInWithUaePassButton extends StatelessWidget {
                 UaePassAppLocalizations.of(context)
                     .translate(LABEL_SIGN_IN_WITH_UAE_PASS),
                 style: TextStyle(
-                  color: Colors.black,
+                  color: isDarkMode && isDisable
+                      ? Colors.black
+                      : isDarkMode
+                          ? Colors.white
+                          : Colors.black,
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                   fontFamily: FONT_FAMILY_GE_FLOW,
