@@ -45,5 +45,26 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>CFBundleURLTypes</key>
+    <array>
+    	<dict>
+    		<key>CFBundleTypeRole</key>
+    		<string>Editor</string>
+    		<key>CFBundleURLName</key>
+    		<string>com.example</string>
+    		<key>CFBundleURLSchemes</key>
+    		<array>
+    			<string>example</string>
+    		</array>
+    	</dict>
+    </array>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+    	<string>googlechromes</string>
+    	<string>uaepass</string>
+    	<string>uaepassstg</string>
+    	<string>http</string>
+    	<string>https</string>
+    </array>
 </dict>
 </plist>
