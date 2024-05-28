@@ -58,7 +58,7 @@ class UaepassPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
   private fun launchApp(call: MethodCall) {
     try {
       var uriSchema = call.argument<Any>(KEY_URL).toString()
-      uriSchema = activity?.let { replaceUriParameter(Uri.parse(uriSchema), KEY_BROWSER_PACKAGE, it.packageName).toString() }
+      uriSchema = replaceUriParameter(Uri.parse(uriSchema), KEY_BROWSER_PACKAGE, activity!!.packageName).toString()
       successUrl = getUriParameter(Uri.parse(uriSchema), KEY_SUCCESS_URL)
 
       val launchIntent = Intent("android.intent.action.VIEW", Uri.parse(uriSchema))
@@ -104,8 +104,8 @@ class UaepassPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
     // This call will be followed by onReattachedToActivityForConfigChanges().
   }
 
-  override fun onReattachedToActivityForConfigChanges(activityPluginBinding: ActivityPluginBinding?) {
-    // TODO: your plugin is now attached to a new Activity after a configuration change.
+  override fun onReattachedToActivityForConfigChanges(activityPluginBinding: ActivityPluginBinding) {
+    this.activity = activityPluginBinding?.getActivity()
   }
 
   override fun onDetachedFromActivity() {
