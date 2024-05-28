@@ -1,34 +1,26 @@
 package com.uaepass.uaepass
 
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
+import io.flutter.plugin.common.MethodChannel.*
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import io.flutter.embedding.engine.plugins.activity.ActivityAware
-import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
+import android.content.Context
 
 
 /** UaepassPlugin */
-class UaepassPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
-  /// The MethodChannel that will the communication between Flutter and native Android
-  ///
-  /// This local reference serves to register the plugin with the Flutter Engine and unregister it
-  /// when the Flutter Engine is detached from the Activity
+class UaepassPlugin: FlutterPlugin, MethodCallHandler{
   private lateinit var channel : MethodChannel
-  private var activity: Activity? = null
+  private lateinit var context: Context
 
   override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     channel = MethodChannel(flutterPluginBinding.binaryMessenger, "uaepass")
     channel.setMethodCallHandler(this)
-  }
-
-  override fun onAttachedToActivity(activityPluginBinding: ActivityPluginBinding) {
-    this.activity = activityPluginBinding.getActivity()
+    context = flutterPluginBinding.applicationContext
   }
 
   override fun onMethodCall(call: MethodCall, result: Result) {
@@ -58,14 +50,14 @@ class UaepassPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
   private fun launchApp(call: MethodCall) {
     try {
       var uriSchema = call.argument<Any>(KEY_URL).toString()
-      uriSchema = replaceUriParameter(Uri.parse(uriSchema), KEY_BROWSER_PACKAGE, activity!!.packageName).toString()
+      uriSchema = replaceUriParameter(Uri.parse(uriSchema), KEY_BROWSER_PACKAGE, context.packageName).toString()
       successUrl = getUriParameter(Uri.parse(uriSchema), KEY_SUCCESS_URL)
 
       val launchIntent = Intent("android.intent.action.VIEW", Uri.parse(uriSchema))
-      launchIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-      if (activity?.let { launchIntent.resolveActivity(it.packageManager) } != null) {
-        activity?.startActivity(launchIntent)
-      }
+      //launchIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+      launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+      context.startActivity(launchIntent)
+
     } catch (e: PackageManager.NameNotFoundException) {
       result.success("")
     }
@@ -97,18 +89,5 @@ class UaepassPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
       }
     }
     return value
-  }
-
-  override fun onDetachedFromActivityForConfigChanges() {
-    // TODO: the Activity your plugin was attached to was destroyed to change configuration.
-    // This call will be followed by onReattachedToActivityForConfigChanges().
-  }
-
-  override fun onReattachedToActivityForConfigChanges(activityPluginBinding: ActivityPluginBinding) {
-    this.activity = activityPluginBinding?.getActivity()
-  }
-
-  override fun onDetachedFromActivity() {
-    // TODO: your plugin is no longer associated with an Activity. Clean up references.
   }
 }

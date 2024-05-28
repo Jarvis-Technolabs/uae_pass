@@ -22,6 +22,6 @@ class MethodChannelUaePass extends UaePassPlatform {
   }) async {
     Map<String, dynamic> args = <String, dynamic>{};
     args.putIfAbsent(URL, () => url);
-    return await methodChannel.invokeMethod<String>(OPEN_UAE_PASS_APP);
+    return await methodChannel.invokeMethod<String>(OPEN_UAE_PASS_APP, args);
   }
 }
