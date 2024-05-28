@@ -13,6 +13,7 @@ import 'package:uae_pass/src/core/flavour/flavour_config.dart';
 import 'package:uae_pass/src/core/localizations/uae_pass_app_localizations.dart';
 import 'package:uae_pass/src/core/util/common_utilities.dart';
 import 'package:uae_pass/src/features/uae_pass_web_view/data/models/uae_pass_web_view_result_model.dart';
+import 'package:uae_pass/uae_pass_platform_interface.dart';
 
 import '../bloc/uae_pass_web_view_bloc.dart';
 import '../bloc/uae_pass_web_view_event.dart';
@@ -237,25 +238,29 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
                   latestUrl = callBackUri.toString();
                 }
 
-                await CommonUtilities().launchURL(url: latestUrl);
+                //await CommonUtilities().launchURL(url: latestUrl);
 
-                ///Todo
-                // var intent = await AppAvailability.launchApp(latestUrl);
-                //
-                // // check if uae pass app returning with valid success data
-                // if (intent != null && intent == KEY_LOAD_SUCCESS_URL) {
-                //   webView.loadUrl(
-                //     urlRequest: URLRequest(
-                //       url: WebUri(successUrl!),
-                //     ),
-                //   );
-                //   return NavigationActionPolicy.CANCEL;
-                // } else if (intent != null && intent == KEY_CANCELLED) {
-                //   BlocProvider.of<UAEPassWebViewBloc>(context).add(ErrorEvent(
-                //       AppLocalizations.of(context).translate(LABEL_USER_CANCEL),
-                //       USER_CANCELLED));
-                //   return NavigationActionPolicy.CANCEL;
-                // }
+                var intent = await UaePassPlatform.instance
+                    .openUaePassApp(url: latestUrl);
+
+                /// check if uae pass app returning with valid success data
+                if (intent != null && intent == KEY_LOAD_SUCCESS_URL) {
+                  webView?.loadUrl(
+                    urlRequest: URLRequest(
+                      url: WebUri(successUrl!),
+                    ),
+                  );
+                  return NavigationActionPolicy.CANCEL;
+                } else if (intent != null && intent == KEY_CANCELLED) {
+                  BlocProvider.of<UAEPassWebViewBloc>(context).add(
+                    ErrorEvent(
+                      UaePassAppLocalizations.of(context)
+                          .translate(LABEL_USER_CANCEL),
+                      USER_CANCELLED,
+                    ),
+                  );
+                  return NavigationActionPolicy.CANCEL;
+                }
                 return NavigationActionPolicy.ALLOW;
               } else if ((Platform.isIOS &&
                       url.contains(UAE_PASS_IOS_APP_LINK)) ||
