@@ -1,7 +1,8 @@
 name: uae_pass
-description: "A new Flutter project."
+description: "UAE Pass"
 version: 0.0.1
-homepage:
+homepage: https://jarvistechnolabs.com/
+repository: https://github.com/Jarvis-Technolabs/uae_pass
 
 environment:
   sdk: '>=3.2.6 <4.0.0'

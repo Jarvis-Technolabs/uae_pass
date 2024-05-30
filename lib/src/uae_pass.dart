@@ -54,6 +54,8 @@ class UaePass {
       }
     } else {
       Flavour.setStagingFlavor(
+        clientId: clientId,
+        clientSecret: clientSecret,
         redirectUrl: redirectUrl,
         state: state,
       );
