@@ -7,5 +7,6 @@
   "something_went_wrong": "هناك خطأ ما. من فضلك حاول مرة أخرى بعد بعض من الوقت",
   "internet_connection_error": "يرجى التحقق من الاتصال بالإنترنت",
   "login_with_uae_pass": "تسجيل الدخول بالهوية الرقمية",
-  "sign_in_with_uae_pass": "تسجيل الدخول بالهوية الرقمية"
+  "sign_in_with_uae_pass": "تسجيل الدخول بالهوية الرقمية",
+  "title_uae_pass": "الهوية الرقمية"
 }

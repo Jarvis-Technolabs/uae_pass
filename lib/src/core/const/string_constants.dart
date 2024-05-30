@@ -7,3 +7,4 @@ const String LABEL_SOMETHING_WENT_WRONG = "something_went_wrong";
 const String LABEL_INTERNET_CONNECTION = "internet_connection_error";
 const String LABEL_LOGIN_WITH_UAE_PASS = "login_with_uae_pass";
 const String LABEL_SIGN_IN_WITH_UAE_PASS = "sign_in_with_uae_pass";
+const String LABEL_TITLE_UAE_PASS = "title_uae_pass";
