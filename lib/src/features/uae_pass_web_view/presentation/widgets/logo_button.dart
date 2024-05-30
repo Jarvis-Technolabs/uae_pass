@@ -9,7 +9,6 @@ class LogoButton extends StatelessWidget {
   final double? customBorderRadius;
   final ButtonShape? buttonShape;
   final bool isDarkMode;
-  final bool isButtonMaxWidth;
   final bool isBorder;
   final bool isDisable;
 
@@ -20,7 +19,6 @@ class LogoButton extends StatelessWidget {
     this.customBorderRadius,
     this.buttonShape = ButtonShape.defaultCornerRadius,
     this.isDarkMode = false,
-    this.isButtonMaxWidth = false,
     this.isBorder = true,
     this.isDisable = false,
   });

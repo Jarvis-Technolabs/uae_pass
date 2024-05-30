@@ -173,6 +173,30 @@ Then run:
 ```
 
 ## Properties:
+- Login and Sign-in Button properties
+
+| **Property**       | **Type**               | **Default value**                                                                   | **Other Values**                                                                           |
+|:-------------------|:-----------------------|:------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------|
+| onPressed          | VoidCallback           | Null                                                                                | VoidCallback Function                                                                      |
+| buttonShape        | ButtonShape            | ButtonShape.defaultCornerRadius                                                     | ButtonShape.minCornerRadius<br/> ButtonShape.maxCornerRadius<br/> ButtonShape.customRadius |
+| customBorderRadius | double                 | 4                                                                                   | double - Any double value                                                                  |
+| isDarkMode         | bool                   | false                                                                               | true                                                                                       |
+| isDisable          | bool                   | false                                                                               | true                                                                                       |
+| isBorder           | bool                   | true                                                                                | false                                                                                      |
+| isButtonMaxWidth   | bool                   | false                                                                               | true                                                                                       |
+| padding            | EdgeInsetsDirectional  | EdgeInsetsDirectional.symmetric(<br/> horizontal: 30.0, <br/>vertical: 10.0, <br/>) | true                                                                                       |
+
+- Logo Button properties
+
+| **Property**       | **Type**               | **Default value**                                                                   | **Other Values**                                                                           |
+|:-------------------|:-----------------------|:------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------|
+| onPressed          | VoidCallback           | Null                                                                                | VoidCallback Function                                                                      |
+| buttonShape        | ButtonShape            | ButtonShape.defaultCornerRadius                                                     | ButtonShape.minCornerRadius<br/> ButtonShape.maxCornerRadius<br/> ButtonShape.customRadius |
+| customBorderRadius | double                 | 4                                                                                   | double - Any double value                                                                  |
+| isDarkMode         | bool                   | false                                                                               | true                                                                                       |
+| isDisable          | bool                   | false                                                                               | true                                                                                       |
+| isBorder           | bool                   | true                                                                                | false                                                                                      |
+| padding            | EdgeInsetsDirectional  | EdgeInsetsDirectional.symmetric(<br/> horizontal: 30.0, <br/>vertical: 10.0, <br/>) | true                                                                                       |
 
 ## Example App demo:
 

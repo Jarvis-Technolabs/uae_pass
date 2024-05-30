@@ -7,7 +7,7 @@ import 'package:uae_pass/src/core/extention/image_extension.dart';
 import 'package:uae_pass/src/core/localizations/uae_pass_app_localizations.dart';
 
 class LoginWithUaePassButton extends StatelessWidget {
-  final VoidCallback? onPressed;
+  final VoidCallback onPressed;
   final EdgeInsetsDirectional? padding;
   final double? customBorderRadius;
   final ButtonShape? buttonShape;
