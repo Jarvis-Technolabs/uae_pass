@@ -10,13 +10,6 @@ class MethodChannelUaePass extends UaePassPlatform {
   final methodChannel = const MethodChannel(METHOD_CHANNEL_NAME);
 
   @override
-  Future<String?> getPlatformVersion() async {
-    final version =
-        await methodChannel.invokeMethod<String>('getPlatformVersion');
-    return version;
-  }
-
-  @override
   Future<dynamic> openUaePassApp({
     required String url,
   }) async {

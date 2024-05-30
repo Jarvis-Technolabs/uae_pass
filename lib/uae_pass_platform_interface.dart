@@ -23,10 +23,6 @@ abstract class UaePassPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
-  }
-
   Future<dynamic> openUaePassApp({
     required String url,
   }) =>
