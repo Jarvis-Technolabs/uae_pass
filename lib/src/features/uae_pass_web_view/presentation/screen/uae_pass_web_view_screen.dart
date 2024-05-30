@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get_it/get_it.dart';
@@ -12,6 +13,7 @@ import 'package:uae_pass/src/core/const/string_constants.dart';
 import 'package:uae_pass/src/core/flavour/flavour_config.dart';
 import 'package:uae_pass/src/core/localizations/uae_pass_app_localizations.dart';
 import 'package:uae_pass/src/core/util/common_utilities.dart';
+import 'package:uae_pass/src/features/uae_pass_web_view/data/models/app_bar_properties.dart';
 import 'package:uae_pass/src/features/uae_pass_web_view/data/models/uae_pass_web_view_result_model.dart';
 import 'package:uae_pass/uae_pass_platform_interface.dart';
 
@@ -21,9 +23,13 @@ import '../bloc/uae_pass_web_view_state.dart';
 
 class UAEPassWebViewScreen extends StatefulWidget {
   final bool isDarkMode;
+  final PreferredSizeWidget? appBar;
+  final AppBarProperties? appBarProperties;
   const UAEPassWebViewScreen({
     super.key,
     this.isDarkMode = false,
+    this.appBar,
+    this.appBarProperties,
   });
 
   @override
@@ -92,24 +98,42 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
               goBack(context, result: uAEPassWebViewResultModel);
             }
           },
-          builder: (context, state) => Column(
-            children: [
-              if (redirectUrl.isNotEmpty) ...[Expanded(child: getWebView())],
-              StreamBuilder<bool>(
-                initialData: true,
-                stream: showLoadingStreamController.stream,
-                builder: (context, snapshot) => snapshot.data!
-                    ? Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height,
-                        child: Center(
-                          child: const CircularProgressIndicator(),
-                        ),
+          builder: (context, state) => StreamBuilder<bool>(
+              initialData: false,
+              stream: routeStreamController.stream,
+              builder: (context, snapshot) {
+                return Scaffold(
+                  backgroundColor: Colors.white,
+                  resizeToAvoidBottomInset: false,
+                  appBar: widget.appBar ??
+                      webViewAppbar(
+                          actions: widget.appBarProperties?.actions,
+                          automaticallyImplyLeading: widget
+                              .appBarProperties?.automaticallyImplyLeading,
+                          backgroundColor:
+                              widget.appBarProperties?.backgroundColor,
+                          backIcon: widget.appBarProperties?.backIcon,
+                          centerTitle: widget.appBarProperties?.centerTitle,
+                          elevation: widget.appBarProperties?.elevation,
+                          shadowColor: widget.appBarProperties?.shadowColor,
+                          titleSpacing: widget.appBarProperties?.titleSpacing,
+                          titleWidget: widget.appBarProperties?.titleWidget),
+                  body: Stack(
+                    children: [
+                      if (redirectUrl.isNotEmpty) ...[getWebView()],
+                      StreamBuilder<bool>(
+                        initialData: true,
+                        stream: showLoadingStreamController.stream,
+                        builder: (context, snapshot) => snapshot.data!
+                            ? Center(
+                                child: const CircularProgressIndicator(),
+                              )
+                            : const SizedBox.shrink(),
                       )
-                    : const SizedBox.shrink(),
-              )
-            ],
-          ),
+                    ],
+                  ),
+                );
+              }),
         ),
       );
 
@@ -350,5 +374,50 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
   }) {
     routeStreamController.add(true);
     Navigator.pop(context, result);
+  }
+
+  PreferredSizeWidget webViewAppbar({
+    Color? backgroundColor,
+    Widget? titleWidget,
+    double? titleSpacing,
+    bool? centerTitle,
+    bool? automaticallyImplyLeading,
+    Widget? backIcon,
+    double? elevation,
+    List<Widget>? actions,
+    Color? shadowColor,
+  }) {
+    return AppBar(
+      elevation: elevation,
+      systemOverlayStyle: widget.isDarkMode
+          ? SystemUiOverlayStyle.light
+          : SystemUiOverlayStyle.dark,
+      backgroundColor: backgroundColor,
+      title: titleWidget ??
+          Text(
+            UaePassAppLocalizations.of(context).translate(LABEL_TITLE_UAE_PASS),
+            style: TextStyle(
+              color: widget.isDarkMode ? Colors.white : Colors.black,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              fontFamily: FONT_FAMILY_GE_FLOW,
+            ),
+          ),
+      shadowColor: shadowColor,
+      titleSpacing: titleSpacing,
+      centerTitle: centerTitle ?? false,
+      automaticallyImplyLeading: automaticallyImplyLeading ?? false,
+      leading: backIcon ??
+          IconButton(
+              onPressed: () async {
+                if (webView != null && await webView!.canGoBack()) {
+                  await webView!.goBack();
+                } else {
+                  await onClickBack();
+                }
+              },
+              icon: Icon(Icons.arrow_back_ios_rounded)),
+      actions: actions,
+    );
   }
 }

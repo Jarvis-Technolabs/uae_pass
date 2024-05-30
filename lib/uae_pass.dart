@@ -7,3 +7,4 @@ export 'src/features/uae_pass_web_view/presentation/widgets/login_with_uae_pass_
 export 'src/features/uae_pass_web_view/presentation/widgets/logo_button.dart';
 export 'src/features/uae_pass_web_view/presentation/widgets/sign_in_with_uae_pass_button.dart';
 export 'src/uae_pass.dart';
+export 'src/features/uae_pass_web_view/data/models/app_bar_properties.dart';

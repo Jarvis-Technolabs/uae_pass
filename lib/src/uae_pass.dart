@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uae_pass/src/core/di/injection_container.dart';
 import 'package:uae_pass/src/core/flavour/flavour.dart';
+import 'package:uae_pass/src/features/uae_pass_web_view/data/models/app_bar_properties.dart';
 import 'package:uae_pass/src/features/uae_pass_web_view/data/models/uae_pass_web_view_result_model.dart';
 import 'package:uae_pass/src/features/uae_pass_web_view/data/repository/uae_pass_repo_impl.dart';
 import 'package:uae_pass/src/features/uae_pass_web_view/presentation/uae_pass_web_view_page.dart';
@@ -17,7 +18,8 @@ class UaePass {
   /// set to false for sandbox, Default is true
   bool isProduction = true;
   bool isDarkMode = false;
-
+  PreferredSizeWidget? appBar;
+  AppBarProperties? appBarProperties;
   UaePass({
     required this.context,
     this.clientId,
@@ -26,6 +28,8 @@ class UaePass {
     required this.state,
     this.isProduction = true,
     this.isDarkMode = false,
+    this.appBar,
+    this.appBarProperties,
   });
 
   Future<void> _setUpEnvironment() async {
@@ -63,6 +67,8 @@ class UaePass {
       MaterialPageRoute(
         builder: (BuildContext context) => UAEPassWebViewPage(
           isDarkMode: isDarkMode,
+          appBarProperties: appBarProperties,
+          appBar: appBar,
         ),
       ),
     );
