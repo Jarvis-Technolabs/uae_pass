@@ -99,41 +99,39 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
             }
           },
           builder: (context, state) => StreamBuilder<bool>(
-              initialData: false,
-              stream: routeStreamController.stream,
-              builder: (context, snapshot) {
-                return Scaffold(
-                  backgroundColor: Colors.white,
-                  resizeToAvoidBottomInset: false,
-                  appBar: widget.appBar ??
-                      webViewAppbar(
-                          actions: widget.appBarProperties?.actions,
-                          automaticallyImplyLeading: widget
-                              .appBarProperties?.automaticallyImplyLeading,
-                          backgroundColor:
-                              widget.appBarProperties?.backgroundColor,
-                          backIcon: widget.appBarProperties?.backIcon,
-                          centerTitle: widget.appBarProperties?.centerTitle,
-                          elevation: widget.appBarProperties?.elevation,
-                          shadowColor: widget.appBarProperties?.shadowColor,
-                          titleSpacing: widget.appBarProperties?.titleSpacing,
-                          titleWidget: widget.appBarProperties?.titleWidget),
-                  body: Stack(
-                    children: [
-                      if (redirectUrl.isNotEmpty) ...[getWebView()],
-                      StreamBuilder<bool>(
-                        initialData: true,
-                        stream: showLoadingStreamController.stream,
-                        builder: (context, snapshot) => snapshot.data!
-                            ? Center(
-                                child: const CircularProgressIndicator(),
-                              )
-                            : const SizedBox.shrink(),
-                      )
-                    ],
-                  ),
-                );
-              }),
+            initialData: false,
+            stream: routeStreamController.stream,
+            builder: (context, snapshot) => Scaffold(
+              backgroundColor: Colors.white,
+              resizeToAvoidBottomInset: false,
+              appBar: widget.appBar ??
+                  webViewAppbar(
+                      actions: widget.appBarProperties?.actions,
+                      automaticallyImplyLeading:
+                          widget.appBarProperties?.automaticallyImplyLeading,
+                      backgroundColor: widget.appBarProperties?.backgroundColor,
+                      backIcon: widget.appBarProperties?.backIcon,
+                      centerTitle: widget.appBarProperties?.centerTitle,
+                      elevation: widget.appBarProperties?.elevation,
+                      shadowColor: widget.appBarProperties?.shadowColor,
+                      titleSpacing: widget.appBarProperties?.titleSpacing,
+                      titleWidget: widget.appBarProperties?.titleWidget),
+              body: Stack(
+                children: [
+                  if (redirectUrl.isNotEmpty) ...[getWebView()],
+                  StreamBuilder<bool>(
+                    initialData: true,
+                    stream: showLoadingStreamController.stream,
+                    builder: (context, snapshot) => snapshot.data!
+                        ? Center(
+                            child: const CircularProgressIndicator(),
+                          )
+                        : const SizedBox.shrink(),
+                  )
+                ],
+              ),
+            ),
+          ),
         ),
       );
 

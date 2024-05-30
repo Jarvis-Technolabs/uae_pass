@@ -20,6 +20,7 @@ class UaePass {
   bool isDarkMode = false;
   PreferredSizeWidget? appBar;
   AppBarProperties? appBarProperties;
+
   UaePass({
     required this.context,
     this.clientId,
