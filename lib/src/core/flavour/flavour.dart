@@ -4,14 +4,16 @@ import 'package:uae_pass/src/core/flavour/flavour_enum.dart';
 
 class Flavour {
   static void setStagingFlavor({
+    String? clientId,
+    String? clientSecret,
     required String redirectUrl,
     required String state,
   }) {
     FlavourConfig(
       flavorEnum: FlavourEnum.staging,
       apiBaseUrl: "https://stg-id.uaepass.ae/",
-      clientId: "sandbox_stage",
-      clientSecret: "sandbox_stage",
+      clientId: clientId ?? "sandbox_stage",
+      clientSecret: clientSecret ?? "sandbox_stage",
       redirectUrl: redirectUrl,
       state: state,
       androidPackageId: "ae.uaepass.mainapp.stg",

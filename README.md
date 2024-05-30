@@ -9,13 +9,11 @@ This package allows flutter app to integrate UAE pass.
 * Support for english and arabic language
 * Button supports dark mode, disable state and other customizations
 
-
 ## **Flutter Compatibility**
 
-| **Package version** | **Dart version** |    **Flutter version**     |
-|:-------------------:|:----------------:|:--------------------------:|
-|        0.0.1        |      3.2.6       |      3.16.0 - 3.19.3       |
-
+| **Package version** | **Dart version** | **Flutter version** |
+|:-------------------:|:----------------:|:-------------------:|
+|        0.0.1        |      3.2.6       |      >=1.17.0       |
 
 ## **Getting Started**
 
@@ -38,7 +36,7 @@ Then run:
 
 ```
 
-## **Android Setup**
+### **Android Setup**
 
 - Add Permission and intent filter in AndroidManifest.xml file
 
@@ -58,7 +56,7 @@ Then run:
     </intent-filter>
 ```
 
-## **iOS Setup**
+### **iOS Setup**
 
 - Add CFBundleURLTypes and LSApplicationQueriesSchemes in info.plist file
 
@@ -104,6 +102,13 @@ Then run:
       ).signIn();
 
 ```
+**Note:**
+- For Android testing follow below steps
+  - Go to App info
+  - Tap on the "Set as default"
+  - Tap on the "Supported web addresses"
+  - Turn on the switch for redirect URL
+
 
 #### SignIn (Production):
 ``` dart
@@ -116,3 +121,61 @@ Then run:
       ).signIn();
 
 ```
+
+#### Buttons
+
+- Login button
+``` dart
+    LoginWithUaePassButton(
+      onPressed: () async {
+        UAEPassWebViewResultModel? uaePassWebViewResultModel =
+          await UaePass(
+          context: context,
+          clientId: ${clientId},
+          clientSecret: ${clientSecret},
+          redirectUrl: ${redirectUrl},
+          state: ${State},
+        ).signIn();
+      },
+    )
+```
+
+- Sign-in button
+``` dart
+    SignInWithUaePassButton(
+      onPressed: () async {
+        UAEPassWebViewResultModel? uaePassWebViewResultModel =
+          await UaePass(
+          context: context,
+          clientId: ${clientId},
+          clientSecret: ${clientSecret},
+          redirectUrl: ${redirectUrl},
+          state: ${State},
+        ).signIn();
+      },
+    )
+```
+
+- Logo button
+``` dart
+    LogoButton(
+      onPressed: () async {
+        UAEPassWebViewResultModel? uaePassWebViewResultModel =
+          await UaePass(
+          context: context,
+          clientId: ${clientId},
+          clientSecret: ${clientSecret},
+          redirectUrl: ${redirectUrl},
+          state: ${State},
+        ).signIn();
+      },
+    )
+```
+
+## Properties:
+
+## Example App demo:
+
+## UAE Pass References:
+- [Official Documentation](https://docs.uaepass.ae/overview)
+- [Staging App Download](https://docs.uaepass.ae/resources/staging-apps)
