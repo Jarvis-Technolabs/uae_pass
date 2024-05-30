@@ -338,7 +338,9 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
   @override
   void dispose() async {
     super.dispose();
-    //showLoadingStreamController.close();
+    webView?.dispose();
+    showLoadingStreamController.close();
+    routeStreamController.close();
     await GetIt.instance.reset();
   }
 
