@@ -106,16 +106,17 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
               resizeToAvoidBottomInset: false,
               appBar: widget.appBar ??
                   webViewAppbar(
-                      actions: widget.appBarProperties?.actions,
-                      automaticallyImplyLeading:
-                          widget.appBarProperties?.automaticallyImplyLeading,
-                      backgroundColor: widget.appBarProperties?.backgroundColor,
-                      backIcon: widget.appBarProperties?.backIcon,
-                      centerTitle: widget.appBarProperties?.centerTitle,
-                      elevation: widget.appBarProperties?.elevation,
-                      shadowColor: widget.appBarProperties?.shadowColor,
-                      titleSpacing: widget.appBarProperties?.titleSpacing,
-                      titleWidget: widget.appBarProperties?.titleWidget),
+                    actions: widget.appBarProperties?.actions,
+                    automaticallyImplyLeading:
+                        widget.appBarProperties?.automaticallyImplyLeading,
+                    backgroundColor: widget.appBarProperties?.backgroundColor,
+                    backIcon: widget.appBarProperties?.backIcon,
+                    centerTitle: widget.appBarProperties?.centerTitle,
+                    elevation: widget.appBarProperties?.elevation,
+                    shadowColor: widget.appBarProperties?.shadowColor,
+                    titleSpacing: widget.appBarProperties?.titleSpacing,
+                    titleWidget: widget.appBarProperties?.titleWidget,
+                  ),
               body: Stack(
                 children: [
                   if (redirectUrl.isNotEmpty) ...[getWebView()],
