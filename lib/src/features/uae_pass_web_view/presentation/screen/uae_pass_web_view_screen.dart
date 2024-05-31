@@ -92,7 +92,7 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
                   UAEPassWebViewResultModel(
                 status: false,
                 message: errorMessage,
-                errorType: state.apiStatus,
+                statusCode: state.apiStatus,
                 uaeDataModel: state.uaeDataModel,
               );
               goBack(context, result: uAEPassWebViewResultModel);
@@ -166,7 +166,7 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
   Future<bool> onClickBack() async {
     UAEPassWebViewResultModel model = UAEPassWebViewResultModel(
         status: false,
-        errorType: USER_CANCELLED,
+        statusCode: USER_CANCELLED,
         message:
             UaePassAppLocalizations.of(context).translate(LABEL_USER_CANCEL));
     await webView?.clearCache();
