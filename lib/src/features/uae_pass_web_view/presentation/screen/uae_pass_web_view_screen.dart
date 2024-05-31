@@ -201,9 +201,6 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
             onWebViewCreated: (InAppWebViewController controller) {
               webView = controller;
             },
-            onLoadStart: (InAppWebViewController controller, Uri? url) {
-              //showLoadingStreamController.add(false);
-            },
             onLoadStop: (InAppWebViewController controller, Uri? url) async {
               showLoadingStreamController.add(false);
             },
@@ -387,29 +384,30 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
     double? elevation,
     List<Widget>? actions,
     Color? shadowColor,
-  }) {
-    return AppBar(
-      elevation: elevation,
-      systemOverlayStyle: widget.isDarkMode
-          ? SystemUiOverlayStyle.light
-          : SystemUiOverlayStyle.dark,
-      backgroundColor: backgroundColor,
-      title: titleWidget ??
-          Text(
-            UaePassAppLocalizations.of(context).translate(LABEL_TITLE_UAE_PASS),
-            style: TextStyle(
-              color: widget.isDarkMode ? Colors.white : Colors.black,
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-              fontFamily: FONT_FAMILY_GE_FLOW,
+  }) =>
+      AppBar(
+        elevation: elevation,
+        systemOverlayStyle: widget.isDarkMode
+            ? SystemUiOverlayStyle.light
+            : SystemUiOverlayStyle.dark,
+        backgroundColor: backgroundColor,
+        title: titleWidget ??
+            Text(
+              UaePassAppLocalizations.of(context)
+                  .translate(LABEL_TITLE_UAE_PASS),
+              style: TextStyle(
+                color: widget.isDarkMode ? Colors.white : Colors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                fontFamily: FONT_FAMILY_GE_FLOW,
+              ),
             ),
-          ),
-      shadowColor: shadowColor,
-      titleSpacing: titleSpacing,
-      centerTitle: centerTitle ?? false,
-      automaticallyImplyLeading: automaticallyImplyLeading ?? false,
-      leading: backIcon ??
-          IconButton(
+        shadowColor: shadowColor,
+        titleSpacing: titleSpacing,
+        centerTitle: centerTitle ?? false,
+        automaticallyImplyLeading: automaticallyImplyLeading ?? false,
+        leading: backIcon ??
+            IconButton(
               onPressed: () async {
                 if (webView != null && await webView!.canGoBack()) {
                   await webView!.goBack();
@@ -417,8 +415,10 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
                   await onClickBack();
                 }
               },
-              icon: Icon(Icons.arrow_back_ios_rounded)),
-      actions: actions,
-    );
-  }
+              icon: Icon(
+                Icons.arrow_back_ios_rounded,
+              ),
+            ),
+        actions: actions,
+      );
 }
