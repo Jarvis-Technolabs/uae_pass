@@ -210,5 +210,5 @@ Then run:
   <a href="https://raw.githubusercontent.com/Jarvis-Technolabs/uae_pass/assets/iOS.gif"><img src="https://raw.githubusercontent.com/Jarvis-Technolabs/uae_pass/assets/iOS.gif" alt="iOS" height="400"/></a>
 
 ## UAE Pass References: 
-- [Official Documentation](https://docs.uaepass.ae/overview)
-- [Staging App Download](https://docs.uaepass.ae/resources/staging-apps)
+- [Documentation](https://docs.uaepass.ae/overview)
+- [Staging Apps](https://docs.uaepass.ae/resources/staging-apps)
