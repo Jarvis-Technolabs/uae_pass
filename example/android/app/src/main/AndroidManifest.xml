@@ -2,7 +2,7 @@
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:label="uaepass_example"
+        android:label="UaePass Example"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
