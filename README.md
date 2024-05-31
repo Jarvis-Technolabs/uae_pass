@@ -79,11 +79,8 @@ Then run:
 ``` xml
     <key>LSApplicationQueriesSchemes</key>
     <array>
-    	<string>googlechromes</string>
     	<string>uaepass</string>
     	<string>uaepassstg</string>
-    	<string>http</string>
-    	<string>https</string>
     </array>
 ```
 
@@ -171,6 +168,13 @@ Then run:
       },
     )
 ```
+
+## Custom Error codes (Status code)
+| **Custom Error code** | **Description**              | **Message**                                                    |
+|:----------------------|:-----------------------------|:---------------------------------------------------------------|
+| 0                     | When any unknown error occur | Something went wrong. Please try again after sometime          |
+| -1                    | When user is SOP1            | Your account is unverified, please visit the nearest UAE PASS  |
+| -2                    | When user cancel the request | Request canceled by user                                       |
 
 ## Properties:
 - Login and Sign-in Button properties

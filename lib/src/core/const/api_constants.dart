@@ -66,9 +66,8 @@ const String UAE_PASS_ANDROID_STAGING_BUNDLE_ID = "uaepassstg://";
 
 // web api error type
 const int RESULT_OK = 200;
-const int PROFILE_ERROR = -2;
-const int PROFILE_ERROR_USER_TYPE_SOP1 = -3;
-const int USER_CANCELLED = -4;
+const int PROFILE_ERROR_USER_TYPE_SOP1 = -1;
+const int USER_CANCELLED = -2;
 
 // Todo remove when uae pass integration complete
 // const String UAE_PASS_LOGOUT_URL =

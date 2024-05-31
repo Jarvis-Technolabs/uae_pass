@@ -17,6 +17,6 @@ class UAEPassWebViewResultModel {
 
   @override
   String toString() {
-    return 'UAEPassWebViewResultModel{status: $status, errorType: $statusCode, message: $message, uaeDataModel: $uaeDataModel}';
+    return 'UAEPassWebViewResultModel{status: $status, statusCode: $statusCode, message: $message, uaeDataModel: $uaeDataModel}';
   }
 }

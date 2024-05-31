@@ -79,14 +79,9 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
               /// Error
               await webView?.clearCache();
               String? errorMessage = state.errorMessage;
-              if (state.apiStatus == PROFILE_ERROR) {
-                errorMessage = UaePassAppLocalizations.of(context)
-                    .translate(UNAUTHORISED_ERROR);
-              } else if (state.apiStatus == PROFILE_ERROR_USER_TYPE_SOP1) {
+              if (state.apiStatus == PROFILE_ERROR_USER_TYPE_SOP1) {
                 errorMessage = UaePassAppLocalizations.of(context)
                     .translate(LABEL_YOUR_ACCOUNT_UNVERIFIED);
-              } else {
-                errorMessage = state.errorMessage;
               }
               UAEPassWebViewResultModel uAEPassWebViewResultModel =
                   UAEPassWebViewResultModel(
