@@ -277,6 +277,17 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
     }
   }
 
+  Future<UAEPassWebViewResultModel?> uaeSignIn({
+    required BuildContext context,
+  }) async =>
+      await UaePass(
+        context: context,
+        redirectUrl: 'https://com.example',
+        state: 'y3m9etA74PQ2yqI73TdVRo6M',
+        isProduction: false,
+        isDarkMode: isDarkMode,
+      ).signIn();
+
   Widget buttonBox({
     required BuildContext context,
     required Widget button,
@@ -297,15 +308,4 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
           ],
         ),
       );
-
-  Future<UAEPassWebViewResultModel?> uaeSignIn({
-    required BuildContext context,
-  }) async =>
-      await UaePass(
-        context: context,
-        redirectUrl: 'https://com.example',
-        state: 'y3m9etA74PQ2yqI73TdVRo6M',
-        isProduction: false,
-        isDarkMode: isDarkMode,
-      ).signIn();
 }

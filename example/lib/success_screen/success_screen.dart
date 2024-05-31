@@ -32,12 +32,7 @@ class SuccessScreen extends StatelessWidget {
                   height: 20,
                 ),
                 Text(
-                  message
-                      .replaceAll("Vipul", "xyz")
-                      .replaceAll("vipul", "xyz")
-                      .replaceAll("Kerai", "pqr")
-                      .replaceAll("jarvis", "pqr")
-                      .replaceAll("917990922803", "123456789"),
+                  message,
                 ),
                 SizedBox(
                   height: 20,
