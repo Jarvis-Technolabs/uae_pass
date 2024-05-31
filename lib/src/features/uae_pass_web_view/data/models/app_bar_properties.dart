@@ -23,6 +23,4 @@ class AppBarProperties {
     this.actions,
     this.shadowColor,
   });
-
-
 }
