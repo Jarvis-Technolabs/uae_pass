@@ -9,7 +9,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  uae_pass:
+  ft_uaepass:
     path: ../
 
 dev_dependencies:

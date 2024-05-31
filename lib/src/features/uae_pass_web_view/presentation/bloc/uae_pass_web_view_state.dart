@@ -1,4 +1,4 @@
-import 'package:uae_pass/src/features/uae_pass_web_view/data/models/uae_data_model.dart';
+import 'package:ft_uaepass/src/features/uae_pass_web_view/data/models/uae_data_model.dart';
 
 abstract class UAEPassWebViewState {}
 

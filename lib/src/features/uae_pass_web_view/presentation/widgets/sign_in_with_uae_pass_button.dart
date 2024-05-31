@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:uae_pass/src/core/const/app_constants.dart';
-import 'package:uae_pass/src/core/const/image_constants.dart';
-import 'package:uae_pass/src/core/const/string_constants.dart';
-import 'package:uae_pass/src/core/enum/button_shape.dart';
-import 'package:uae_pass/src/core/extention/image_extension.dart';
-import 'package:uae_pass/src/core/localizations/uae_pass_app_localizations.dart';
+import 'package:ft_uaepass/src/core/const/app_constants.dart';
+import 'package:ft_uaepass/src/core/const/image_constants.dart';
+import 'package:ft_uaepass/src/core/const/string_constants.dart';
+import 'package:ft_uaepass/src/core/enum/button_shape.dart';
+import 'package:ft_uaepass/src/core/extention/image_extension.dart';
+import 'package:ft_uaepass/src/core/localizations/uae_pass_app_localizations.dart';
 
 class SignInWithUaePassButton extends StatelessWidget {
   final VoidCallback? onPressed;

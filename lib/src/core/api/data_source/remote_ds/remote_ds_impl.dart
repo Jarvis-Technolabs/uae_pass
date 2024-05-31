@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
-import 'package:uae_pass/src/core/const/api_constants.dart';
-import 'package:uae_pass/src/core/di/injection_container.dart';
-import 'package:uae_pass/src/core/flavour/flavour_config.dart';
-import 'package:uae_pass/src/core/util/common_utilities.dart';
+import 'package:ft_uaepass/src/core/const/api_constants.dart';
+import 'package:ft_uaepass/src/core/di/injection_container.dart';
+import 'package:ft_uaepass/src/core/flavour/flavour_config.dart';
+import 'package:ft_uaepass/src/core/util/common_utilities.dart';
 
 import '../../model/api_response.dart';
 import 'remote_ds.dart';

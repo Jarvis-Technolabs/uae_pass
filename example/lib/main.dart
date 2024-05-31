@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:uae_pass/uae_pass.dart';
+import 'package:ft_uaepass/uae_pass.dart';
 import 'package:uaepass_example/home_screen/home_screen.dart';
 
 void main() => runApp(const MyApp());

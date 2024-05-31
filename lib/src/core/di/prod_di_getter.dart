@@ -1,7 +1,7 @@
-import 'package:uae_pass/src/core/di/di_getter.dart';
-import 'package:uae_pass/src/core/di/injection_container.dart';
-import 'package:uae_pass/src/features/uae_pass_web_view/data/repository/uae_pass_repo_impl.dart';
-import 'package:uae_pass/src/features/uae_pass_web_view/domain/uae_pass_repo.dart';
+import 'package:ft_uaepass/src/core/di/di_getter.dart';
+import 'package:ft_uaepass/src/core/di/injection_container.dart';
+import 'package:ft_uaepass/src/features/uae_pass_web_view/data/repository/uae_pass_repo_impl.dart';
+import 'package:ft_uaepass/src/features/uae_pass_web_view/domain/uae_pass_repo.dart';
 
 class ProdDIGetter implements DIGetter {
   @override

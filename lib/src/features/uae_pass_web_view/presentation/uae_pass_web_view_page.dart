@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uae_pass/src/features/uae_pass_web_view/data/models/app_bar_properties.dart';
+import 'package:ft_uaepass/src/features/uae_pass_web_view/data/models/app_bar_properties.dart';
 
 import 'bloc/uae_pass_web_view_bloc.dart';
 import 'screen/uae_pass_web_view_screen.dart';

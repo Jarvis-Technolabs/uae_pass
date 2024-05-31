@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:uae_pass/src/core/const/image_constants.dart';
-import 'package:uae_pass/src/core/enum/button_shape.dart';
-import 'package:uae_pass/src/core/extention/image_extension.dart';
+import 'package:ft_uaepass/src/core/const/image_constants.dart';
+import 'package:ft_uaepass/src/core/enum/button_shape.dart';
+import 'package:ft_uaepass/src/core/extention/image_extension.dart';
 
 class LogoButton extends StatelessWidget {
   final VoidCallback? onPressed;

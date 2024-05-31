@@ -1,6 +1,6 @@
+import 'package:ft_uaepass/src/core/const/app_constants.dart';
+import 'package:ft_uaepass/src/core/loggers/log_to_file.dart';
 import 'package:logger/logger.dart';
-import 'package:uae_pass/src/core/const/app_constants.dart';
-import 'package:uae_pass/src/core/loggers/log_to_file.dart';
 
 class AppLogPrinter extends LogPrinter {
   final LoggerFileUtil loggerFileUtil;

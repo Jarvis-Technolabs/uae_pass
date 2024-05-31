@@ -1,6 +1,6 @@
-import 'package:uae_pass/src/core/const/asset_constants.dart';
-import 'package:uae_pass/src/core/flavour/flavour_config.dart';
-import 'package:uae_pass/src/core/flavour/flavour_enum.dart';
+import 'package:ft_uaepass/src/core/const/asset_constants.dart';
+import 'package:ft_uaepass/src/core/flavour/flavour_config.dart';
+import 'package:ft_uaepass/src/core/flavour/flavour_enum.dart';
 
 class Flavour {
   static void setStagingFlavor({

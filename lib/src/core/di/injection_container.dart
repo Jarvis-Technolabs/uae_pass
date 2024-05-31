@@ -1,12 +1,12 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:ft_uaepass/src/core/di/prod_di_getter.dart';
+import 'package:ft_uaepass/src/core/util/common_utilities.dart';
+import 'package:ft_uaepass/src/features/uae_pass_web_view/data/datasource/uae_pass_data_source.dart';
+import 'package:ft_uaepass/src/features/uae_pass_web_view/data/datasource/uae_pass_data_source_impl.dart';
+import 'package:ft_uaepass/src/features/uae_pass_web_view/domain/uae_pass_repo.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
-import 'package:uae_pass/src/core/di/prod_di_getter.dart';
-import 'package:uae_pass/src/core/util/common_utilities.dart';
-import 'package:uae_pass/src/features/uae_pass_web_view/data/datasource/uae_pass_data_source.dart';
-import 'package:uae_pass/src/features/uae_pass_web_view/data/datasource/uae_pass_data_source_impl.dart';
-import 'package:uae_pass/src/features/uae_pass_web_view/domain/uae_pass_repo.dart';
 
 import '../api/data_source/network_info/network_info.dart';
 import '../api/data_source/network_info/network_info_impl.dart';

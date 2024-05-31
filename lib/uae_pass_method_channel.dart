@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:uae_pass/src/core/const/app_constants.dart';
-import 'package:uae_pass/uae_pass_platform_interface.dart';
+import 'package:ft_uaepass/src/core/const/app_constants.dart';
+import 'package:ft_uaepass/uae_pass_platform_interface.dart';
 
 /// An implementation of [UaePassPlatform] that uses method channels.
 class MethodChannelUaePass extends UaePassPlatform {

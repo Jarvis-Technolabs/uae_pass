@@ -1,4 +1,4 @@
-import 'package:uae_pass/src/core/flavour/flavour_enum.dart';
+import 'package:ft_uaepass/src/core/flavour/flavour_enum.dart';
 
 class FlavourConfig {
   final FlavourEnum flavorEnum;

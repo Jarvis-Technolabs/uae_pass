@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uae_pass/src/core/const/api_constants.dart';
-import 'package:uae_pass/src/core/di/injection_container.dart';
-import 'package:uae_pass/src/core/flavour/flavour_config.dart';
-import 'package:uae_pass/src/features/uae_pass_web_view/data/models/uae_data_model.dart';
-import 'package:uae_pass/src/features/uae_pass_web_view/data/models/uae_pass_access_token.dart';
-import 'package:uae_pass/src/features/uae_pass_web_view/domain/uae_pass_repo.dart';
+import 'package:ft_uaepass/src/core/const/api_constants.dart';
+import 'package:ft_uaepass/src/core/di/injection_container.dart';
+import 'package:ft_uaepass/src/core/flavour/flavour_config.dart';
+import 'package:ft_uaepass/src/features/uae_pass_web_view/data/models/uae_data_model.dart';
+import 'package:ft_uaepass/src/features/uae_pass_web_view/data/models/uae_pass_access_token.dart';
+import 'package:ft_uaepass/src/features/uae_pass_web_view/domain/uae_pass_repo.dart';
 
 import 'uae_pass_web_view_event.dart';
 import 'uae_pass_web_view_state.dart';

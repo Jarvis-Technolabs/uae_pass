@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
-import 'package:uae_pass/src/core/api/data_source/network_info/network_info.dart';
-import 'package:uae_pass/src/core/api/model/failure.dart';
-import 'package:uae_pass/src/core/api/model/success.dart';
-import 'package:uae_pass/src/core/const/api_constants.dart';
-import 'package:uae_pass/src/features/uae_pass_web_view/data/datasource/uae_pass_data_source.dart';
-import 'package:uae_pass/src/features/uae_pass_web_view/data/models/uae_data_model.dart';
-import 'package:uae_pass/src/features/uae_pass_web_view/data/models/uae_pass_access_token.dart';
-import 'package:uae_pass/src/features/uae_pass_web_view/domain/uae_pass_repo.dart';
+import 'package:ft_uaepass/src/core/api/data_source/network_info/network_info.dart';
+import 'package:ft_uaepass/src/core/api/model/failure.dart';
+import 'package:ft_uaepass/src/core/api/model/success.dart';
+import 'package:ft_uaepass/src/core/const/api_constants.dart';
+import 'package:ft_uaepass/src/features/uae_pass_web_view/data/datasource/uae_pass_data_source.dart';
+import 'package:ft_uaepass/src/features/uae_pass_web_view/data/models/uae_data_model.dart';
+import 'package:ft_uaepass/src/features/uae_pass_web_view/data/models/uae_pass_access_token.dart';
+import 'package:ft_uaepass/src/features/uae_pass_web_view/domain/uae_pass_repo.dart';
 
 class UaePassRepoImpl extends UaePassRepo {
   late final UaePassDataSource uaePassDataSource;

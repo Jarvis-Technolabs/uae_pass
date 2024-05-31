@@ -1,4 +1,4 @@
-import 'package:uae_pass/src/core/flavour/flavour_config.dart';
+import 'package:ft_uaepass/src/core/flavour/flavour_config.dart';
 
 const bool ENABLE_STORING_LOGS_TO_FILE = false;
 const String ANDROID_DOWNLOAD_PATH = "storage/emulated/0/Download/";

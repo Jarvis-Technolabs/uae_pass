@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:appcheck/appcheck.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_custom_utility/flutter_custom_utility.dart';
+import 'package:ft_uaepass/src/core/di/injection_container.dart';
+import 'package:ft_uaepass/src/core/flavour/flavour_config.dart';
 import 'package:logger/logger.dart';
-import 'package:uae_pass/src/core/di/injection_container.dart';
-import 'package:uae_pass/src/core/flavour/flavour_config.dart';
 
 Logger? logger = sl();
 

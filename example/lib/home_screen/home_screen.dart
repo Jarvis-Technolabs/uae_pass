@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:uae_pass/uae_pass.dart';
+import 'package:ft_uaepass/uae_pass.dart';
 import 'package:uaepass_example/error_screen/error_screen.dart';
 import 'package:uaepass_example/main.dart';
 import 'package:uaepass_example/success_screen/success_screen.dart';
