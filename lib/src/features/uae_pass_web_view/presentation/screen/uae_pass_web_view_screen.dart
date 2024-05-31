@@ -202,9 +202,11 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
               webView = controller;
             },
             onLoadStart: (InAppWebViewController controller, Uri? url) {
+              //showLoadingStreamController.add(false);
+            },
+            onLoadStop: (InAppWebViewController controller, Uri? url) async {
               showLoadingStreamController.add(false);
             },
-            onLoadStop: (InAppWebViewController controller, Uri? url) async {},
             onCreateWindow:
                 (controller, CreateWindowAction createWindowAction) async {
               await webView?.loadUrl(urlRequest: createWindowAction.request);
