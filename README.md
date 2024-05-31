@@ -85,7 +85,7 @@ Then run:
 ```
 
 ## **Scope**
-- For now urn:uae:digitalid:profile:general scope is only supported
+- For now `urn:uae:digitalid:profile:general` scope is only supported
 
 ## **Usage**
 
