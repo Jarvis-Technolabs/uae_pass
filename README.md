@@ -199,6 +199,10 @@ Then run:
 | padding            | EdgeInsetsDirectional  | EdgeInsetsDirectional.symmetric(<br/> horizontal: 30.0, <br/>vertical: 10.0, <br/>) | true                                                                                       |
 
 ## Example App demo:
+| **Platform** |                                                                                                **Example App Demo**                                                                                                |
+|:-------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| Android      | <a href="https://raw.githubusercontent.com/Jarvis-Technolabs/uae_pass/assets/Android.gif"><img src="https://raw.githubusercontent.com/Jarvis-Technolabs/uae_pass/assets/Android.gif" alt="Android" height="400"/>  |
+| iOS          |       <a href="https://raw.githubusercontent.com/Jarvis-Technolabs/uae_pass/assets/iOS.gif"><img src="https://raw.githubusercontent.com/Jarvis-Technolabs/uae_pass/assets/iOS.gif" alt="iOS" height="400"/>        |
 
 ## UAE Pass References:
 - [Official Documentation](https://docs.uaepass.ae/overview)
