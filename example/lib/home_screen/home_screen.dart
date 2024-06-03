@@ -283,7 +283,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
       await UaePass(
         context: context,
         redirectUrl: 'https://com.example',
-        state: '',
+        state: 'y3m9etA74PQ2yqI73TdVRo6M',
         isProduction: false,
         isDarkMode: isDarkMode,
       ).signIn();

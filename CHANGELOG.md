@@ -1,3 +1,7 @@
+## 0.0.6+6
+
+* Resolved analysis issues
+
 ## 0.0.5+5
 
 * Resolved analysis issues

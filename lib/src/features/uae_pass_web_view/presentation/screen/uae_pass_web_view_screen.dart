@@ -67,7 +67,7 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
           } else if (state is FetchUAEPassProfileState) {
             /// UAE Pass login -> fetch uae pass profile data
 
-            await webView?.clearCache();
+            await clearInAppWebViewCache();
             UAEPassWebViewResultModel uAEPassWebViewResultModel =
                 UAEPassWebViewResultModel(
               status: (state.uaeDataModel.userType != kUserTypeSop1),
@@ -77,7 +77,7 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
             goBack(context, result: uAEPassWebViewResultModel);
           } else if (state is ErrorState) {
             /// Error
-            await webView?.clearCache();
+            await clearInAppWebViewCache();
             String? errorMessage = state.errorMessage;
             if (state.apiStatus == kSop1UserTypeErrorCode) {
               errorMessage = UaePassAppLocalizations.of(context)
@@ -174,13 +174,24 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
         statusCode: kUserCancelledCode,
         message:
             UaePassAppLocalizations.of(context).translate(kLabelUserCancel));
-    await webView?.clearCache();
+    await clearInAppWebViewCache();
     routeStreamController.add(true);
     Navigator.of(context).pop(model);
     return true;
   }
 
+  ///Clear web view cache so it can ask to login again
+  Future<void> clearInAppWebViewCache() async {
+    await webView?.clearCache();
+
+    ///Not working
+    ///Issue: https://github.com/pichillilorenzo/flutter_inappwebview/issues/2143
+    //await InAppWebViewController.clearAllCache(includeDiskFiles: true);
+  }
+
+  ///Web view UI
   Widget getWebView() => InAppWebView(
+        key: UniqueKey(),
         initialSettings: InAppWebViewSettings(
           forceDark: widget.isDarkMode ? ForceDark.ON : ForceDark.OFF,
           useShouldOverrideUrlLoading: true,

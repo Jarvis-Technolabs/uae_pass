@@ -1,4 +1,4 @@
-const kPackagePath = "packages/uae_pass/";
+const kPackagePath = "packages/ft_uaepass/";
 const kAssetsPath = "${kPackagePath}assets/";
 const kImagePath = "${kAssetsPath}images/";
 const kLanguagePath = "${kAssetsPath}lang/";
