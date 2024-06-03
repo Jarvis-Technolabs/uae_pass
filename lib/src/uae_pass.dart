@@ -11,8 +11,6 @@ class UaePass {
   late String? clientId;
   late String? clientSecret;
   late String redirectUrl;
-
-  ///
   late String state;
 
   /// set to false for sandbox, Default is true

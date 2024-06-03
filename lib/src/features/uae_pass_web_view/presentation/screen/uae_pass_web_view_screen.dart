@@ -251,8 +251,6 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
               latestUrl = callBackUri.toString();
             }
 
-            //await CommonUtilities().launchURL(url: latestUrl);
-
             var intent =
                 await UaePassPlatform.instance.openUaePassApp(url: latestUrl);
 
@@ -346,7 +344,6 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
   void dispose() async {
     super.dispose();
     await GetIt.instance.reset();
-    //webView?.dispose();
     showLoadingStreamController.close();
     routeStreamController.close();
   }
