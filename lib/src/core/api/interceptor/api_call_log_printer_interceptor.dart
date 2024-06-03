@@ -26,7 +26,7 @@ class ApiCallLogPrinterInterceptors extends InterceptorsWrapper {
     ResponseInterceptorHandler handler,
   ) {
     commonUtilities.printFullLog(
-        "\n\nAPI: ${response.requestOptions.path} => RESPONSE[${response.statusCode}] => RESPONSE_BODY: ${response}\n\n");
+        "\n\nAPI: ${response.requestOptions.path} => RESPONSE[${response.statusCode}] => RESPONSE_BODY: $response\n\n");
     return super.onResponse(response, handler);
   }
 

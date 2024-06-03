@@ -23,16 +23,15 @@ class ServerException implements Exception {
     statusCode ??= 0;
     serverMessage ??= '';
     internalStatusCode ??= '';
-    if (statusCode == 0)
+    if (statusCode == 0) {
       return '$internalStatusCode $message $serverMessage';
-    else
+    } else {
       return '$internalStatusCode $statusCode $message $serverMessage';
+    }
   }
 
   factory ServerException.handleServerException(Response response) {
     ApiResponse responseData = ApiResponse.fromJson(json.decode(response.body));
-
-    print('ServerException : $responseData');
 
     return ServerException(
       statusCode: response.statusCode,

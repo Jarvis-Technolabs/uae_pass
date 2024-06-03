@@ -25,8 +25,8 @@ class UAEPassWebViewBloc
   ) async {
     UAEPassAccessToken uaePassAccessToken = UAEPassAccessToken(
       code: fetchUAEPassProfileEvent.accessToken,
-      grant_type: KEY_AUTHORIZATION_CODE,
-      redirect_uri: FlavourConfig.instance.redirectUrl,
+      grantType: kKeyAuthorizationCode,
+      redirectUri: FlavourConfig.instance.redirectUrl,
     );
     final output =
         await uaePassRepo!.callUAEPassAccessToken(uaePassAccessToken);
@@ -53,11 +53,11 @@ class UAEPassWebViewBloc
           },
           (responseModel) async {
             UAEDataModel model = responseModel.data;
-            if (model.userType == USER_TYPE_SOP1) {
+            if (model.userType == kUserTypeSop1) {
               emit(
                 ErrorState(
                   "",
-                  PROFILE_ERROR_USER_TYPE_SOP1,
+                  kSop1UserTypeErrorCode,
                   uaeDataModel: model,
                 ),
               );

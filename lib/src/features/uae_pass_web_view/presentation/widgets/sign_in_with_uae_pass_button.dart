@@ -16,7 +16,7 @@ class SignInWithUaePassButton extends StatelessWidget {
   final bool isBorder;
   final bool isDisable;
 
-  SignInWithUaePassButton({
+  const SignInWithUaePassButton({
     super.key,
     required this.onPressed,
     this.padding,
@@ -37,7 +37,7 @@ class SignInWithUaePassButton extends StatelessWidget {
             shadowColor: Colors.transparent,
             shape: getButtonShape(),
             padding: padding ??
-                EdgeInsetsDirectional.symmetric(
+                const EdgeInsetsDirectional.symmetric(
                   horizontal: 30.0,
                   vertical: 10.0,
                 ),
@@ -59,17 +59,17 @@ class SignInWithUaePassButton extends StatelessWidget {
                 isButtonMaxWidth ? MainAxisSize.max : MainAxisSize.min,
             children: [
               (isDisable
-                      ? DISABLED_UAE_PASS_ICON
+                      ? kDisabledUaePassIcon
                       : isDarkMode
-                          ? DARK_UAE_PASS_ICON
-                          : LIGHT_UAE_PASS_ICON)
+                          ? kDarkUaePassIcon
+                          : kLightUaePassIcon)
                   .getImage(),
-              SizedBox(
+              const SizedBox(
                 width: 8.0,
               ),
               Text(
                 UaePassAppLocalizations.of(context)
-                    .translate(LABEL_SIGN_IN_WITH_UAE_PASS),
+                    .translate(kLabelSignInWithUaePass),
                 style: TextStyle(
                   color: isDarkMode && isDisable
                       ? Colors.black
@@ -78,7 +78,7 @@ class SignInWithUaePassButton extends StatelessWidget {
                           : Colors.black,
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
-                  fontFamily: FONT_FAMILY_GE_FLOW,
+                  fontFamily: kFontFamilyGeFlow,
                 ),
               ),
             ],

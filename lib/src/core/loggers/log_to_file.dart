@@ -8,10 +8,10 @@ import '../const/app_constants.dart';
 class LoggerFileUtil {
   static Future<File> get getTemporaryFile async {
     if (Platform.isAndroid) {
-      return File('${ANDROID_DOWNLOAD_PATH}/${LOG_FILE_NAME}');
+      return File('$kAndroidDownloadPath/$kLogFileName');
     } else {
       final directory = await getApplicationDocumentsDirectory();
-      return File('${directory.path}/${LOG_FILE_NAME}');
+      return File('${directory.path}/$kLogFileName');
     }
   }
 
@@ -22,7 +22,7 @@ class LoggerFileUtil {
       File file = await getTemporaryFile;
       if (!await file.exists()) await file.create();
       String fileData = await file.readAsString();
-      await file.writeAsString(fileData + "\n\n" + data, flush: true);
+      await file.writeAsString("$fileData\n\n$data", flush: true);
     }
   }
 

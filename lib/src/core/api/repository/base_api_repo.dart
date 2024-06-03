@@ -23,18 +23,18 @@ abstract class BaseApiRepo {
     bool isConnected = await networkInfo.isConnected;
 
     if (!isConnected) {
-      return InternetConnectionException();
+      return internetConnectionException();
     }
     try {
       return await apiCall();
     } on DioException catch (e) {
       String statusMessage = "";
-      int statusCode = LOCAL_ERROR_CODE;
+      int statusCode = kLocalErrorCode;
       if (e.response != null) {
         statusCode = e.response!.statusCode!;
-        statusMessage = LABEL_INTERNAL_SERVER_ERROR;
-        if (statusCode == UN_AUTHORISED_ERROR_CODE) {
-          statusMessage = UNAUTHORISED_ERROR;
+        statusMessage = kLabelInternalServerError;
+        if (statusCode == kUnAuthorisedErrorCode) {
+          statusMessage = kUnAuthorisedError;
         }
       } else {
         if (e.error is SocketException) {
@@ -51,15 +51,15 @@ abstract class BaseApiRepo {
       return Left(defaultFailure());
     } catch (e) {
       if (e.toString().contains('AuthorizationErrorCode.canceled')) {
-        return Left(
+        return const Left(
           ServerFailure(
-            errorMessage: LABEL_SOMETHING_WENT_WRONG,
-            statusCode: LOCAL_ERROR_CODE,
+            errorMessage: kLabelSomethingWentWrong,
+            statusCode: kLocalErrorCode,
           ),
         );
       }
 
-      if (e.toString().contains(SOCKET_EXCEPTION)) {
+      if (e.toString().contains(kSocketException)) {
         return timeOutException();
       }
       return Left(
@@ -68,22 +68,22 @@ abstract class BaseApiRepo {
     } finally {}
   }
 
-  ServerFailure defaultFailure() => ServerFailure(
-        errorMessage: LABEL_SOMETHING_WENT_WRONG,
-        statusCode: LOCAL_ERROR_CODE,
+  ServerFailure defaultFailure() => const ServerFailure(
+        errorMessage: kLabelSomethingWentWrong,
+        statusCode: kLocalErrorCode,
       );
 
-  Left<Failure, Success> InternetConnectionException() => Left(
+  Left<Failure, Success> internetConnectionException() => const Left(
         ServerFailure(
-          errorMessage: LABEL_INTERNET_CONNECTION,
-          statusCode: LOCAL_ERROR_CODE,
+          errorMessage: kLabelInternetConnection,
+          statusCode: kLocalErrorCode,
         ),
       );
 
-  Left<Failure, Success> timeOutException() => Left(
+  Left<Failure, Success> timeOutException() => const Left(
         ServerFailure(
-          errorMessage: LABEL_TIMEOUT_ERROR_MESSAGE,
-          statusCode: LOCAL_ERROR_CODE,
+          errorMessage: kLabelTimeoutErrorMessage,
+          statusCode: kLocalErrorCode,
         ),
       );
 }

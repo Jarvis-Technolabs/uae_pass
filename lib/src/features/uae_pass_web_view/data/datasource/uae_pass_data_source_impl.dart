@@ -16,9 +16,9 @@ class UaePassDataSourceImpl extends UaePassDataSource {
   Future<dynamic> callUAEPassAccessToken(
           UAEPassAccessToken uaePassAccessToken) =>
       remoteDataSource.executePost(
-        path: UAE_PASS_TOKEN_URL,
+        path: kUaePassTokenUrl,
         requestBody: uaePassAccessToken.toJson(),
-        token: KEY_BASIC_AUTH_TOKEN +
+        token: kKeyBasicAuthToken +
             base64Encode(utf8.encode(
                 "${FlavourConfig.instance.clientId}:${FlavourConfig.instance.clientSecret}")),
       );
@@ -26,7 +26,7 @@ class UaePassDataSourceImpl extends UaePassDataSource {
   @override
   Future<dynamic> getUserData(String accessToken) =>
       remoteDataSource.executeGet(
-        path: UAE_PASS_PROFILE_URL,
+        path: kUaePassProfileUrl,
         token: "Bearer $accessToken",
       );
 }

@@ -10,6 +10,7 @@ import 'package:ft_uaepass/src/features/uae_pass_web_view/domain/uae_pass_repo.d
 
 class UaePassRepoImpl extends UaePassRepo {
   late final UaePassDataSource uaePassDataSource;
+  @override
   late final NetworkInfo networkInfo;
 
   UaePassRepoImpl({
@@ -36,7 +37,7 @@ class UaePassRepoImpl extends UaePassRepo {
     } else {
       return Right(
         Success(
-          data: response.data[KEY_ACCESS_TOKEN],
+          data: response.data[kKeyAccessToken],
         ),
       );
     }

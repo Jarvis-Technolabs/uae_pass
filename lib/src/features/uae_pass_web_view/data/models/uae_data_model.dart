@@ -64,26 +64,26 @@ class UAEDataModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['idType'] = this.idType;
-    data['sub'] = this.sub;
-    data['spuuid'] = this.spuuid;
-    data['lastnameEN'] = this.lastnameEN;
-    data['firstnameEN'] = this.firstnameEN;
-    data['nationalityAR'] = this.nationalityAR;
-    data['idn'] = this.idn;
-    data['userType'] = this.userType;
-    data['fullnameAR'] = this.fullnameAR;
-    data['email'] = this.email;
-    data['fullnameEN'] = this.fullnameEN;
-    data['firstnameAR'] = this.firstnameAR;
-    data['nationalityEN'] = this.nationalityEN;
-    data['domain'] = this.domain;
-    data['gender'] = this.gender;
-    data['lastnameAR'] = this.lastnameAR;
-    data['uuid'] = this.uuid;
-    data['acr'] = this.acr;
-    data['mobile'] = this.mobile;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['idType'] = idType;
+    data['sub'] = sub;
+    data['spuuid'] = spuuid;
+    data['lastnameEN'] = lastnameEN;
+    data['firstnameEN'] = firstnameEN;
+    data['nationalityAR'] = nationalityAR;
+    data['idn'] = idn;
+    data['userType'] = userType;
+    data['fullnameAR'] = fullnameAR;
+    data['email'] = email;
+    data['fullnameEN'] = fullnameEN;
+    data['firstnameAR'] = firstnameAR;
+    data['nationalityEN'] = nationalityEN;
+    data['domain'] = domain;
+    data['gender'] = gender;
+    data['lastnameAR'] = lastnameAR;
+    data['uuid'] = uuid;
+    data['acr'] = acr;
+    data['mobile'] = mobile;
     return data;
   }
 

@@ -10,11 +10,8 @@ import 'package:ft_uaepass/src/core/util/common_utilities.dart';
 import '../../model/api_response.dart';
 import 'remote_ds.dart';
 
-const String GET_METHOD = 'GET';
-const String POST_METHOD = 'POST';
-const String PUT_METHOD = 'PUT';
-const String PATCH_METHOD = 'PATCH';
-const String DELETE_METHOD = 'DELETE';
+const String kGetMethod = 'GET';
+const String kPostMethod = 'POST';
 
 CommonUtilities commonUtilities = sl();
 
@@ -67,13 +64,13 @@ class RemoteDataSourceImpl extends IRemoteDataSource {
     Map<String, dynamic> header = <String, dynamic>{};
     if (token != null) {
       header.putIfAbsent(
-        KEY_AUTHORIZATION,
+        kKeyAuthorization,
         () => token,
       );
     }
     header.putIfAbsent(
-      CONTENT_TYPE,
-      () => APPLICATION_X_WWW_URL_FORM_URL_ENCODED_CONTENT_TYPE,
+      kContentType,
+      () => kApplicationXWwwFromUrlEncodedContentType,
     );
     return header;
   }
@@ -89,25 +86,25 @@ class RemoteDataSourceImpl extends IRemoteDataSource {
     String? baseURL,
   }) async {
     ///Header
-    final Map<String, dynamic> _header = await getHeader(token: token);
+    final Map<String, dynamic> header = await getHeader(token: token);
 
     /// Query parameters
-    final Map<String, dynamic> _queryParameters = <String, dynamic>{};
+    final Map<String, dynamic> queryParameters0 = <String, dynamic>{};
     if (queryParameters != null) {
-      _queryParameters.addAll(queryParameters);
+      queryParameters0.addAll(queryParameters);
     }
 
     ///Request body
-    final Map<String, dynamic> _requestBody = <String, dynamic>{};
+    final Map<String, dynamic> requestBody0 = <String, dynamic>{};
     if (requestBody != null) {
-      _requestBody.addAll(requestBody);
+      requestBody0.addAll(requestBody);
     }
 
     final response = await client.fetch(
       _setStreamType<ApiResponse>(
         Options(
           method: method,
-          headers: _header,
+          headers: header,
           extra: <String, dynamic>{},
         )
             .compose(
@@ -134,7 +131,7 @@ class RemoteDataSourceImpl extends IRemoteDataSource {
     ///Get Request
     return await callAPI(
       path: path,
-      method: GET_METHOD,
+      method: kGetMethod,
       queryParameters: queryParameters,
       requestBody: requestBody,
       token: token,
@@ -151,7 +148,7 @@ class RemoteDataSourceImpl extends IRemoteDataSource {
     ///Post Request
     return await callAPI(
       path: path,
-      method: POST_METHOD,
+      method: kPostMethod,
       queryParameters: queryParameters,
       requestBody: requestBody,
       token: token,

@@ -12,7 +12,7 @@ class LogoButton extends StatelessWidget {
   final bool isBorder;
   final bool isDisable;
 
-  LogoButton({
+  const LogoButton({
     super.key,
     required this.onPressed,
     this.padding,
@@ -32,7 +32,7 @@ class LogoButton extends StatelessWidget {
             shadowColor: Colors.transparent,
             shape: getButtonShape(),
             padding: padding ??
-                EdgeInsetsDirectional.symmetric(
+                const EdgeInsetsDirectional.symmetric(
                   horizontal: 12.0,
                   vertical: 12.0,
                 ),
@@ -43,7 +43,7 @@ class LogoButton extends StatelessWidget {
                     ? Colors.black
                     : Colors.white,
             splashFactory: InkRipple.splashFactory,
-            minimumSize: Size(
+            minimumSize: const Size(
               30.0,
               30.0,
             ),
@@ -53,10 +53,10 @@ class LogoButton extends StatelessWidget {
           ),
           onPressed: isDisable ? null : onPressed,
           child: (isDisable
-                  ? DISABLED_UAE_PASS_ICON
+                  ? kDisabledUaePassIcon
                   : isDarkMode
-                      ? DARK_UAE_PASS_ICON
-                      : LIGHT_UAE_PASS_ICON)
+                      ? kDarkUaePassIcon
+                      : kLightUaePassIcon)
               .getImage(
             height: 30.0,
             width: 30.0,

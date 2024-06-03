@@ -23,13 +23,12 @@ import 'mock_di_getter.dart';
 final GetIt sl = GetIt.instance;
 
 /// change as per requirements of mock data/prod data
-const choice = Choice.PROD_DATA;
+const choice = Choice.prodData;
 
 ///init
 Future<void> init() async {
   /// Dependency Injector
-  DIGetter getter =
-      choice == Choice.MOCK_DATA ? MockDIGetter() : ProdDIGetter();
+  DIGetter getter = choice == Choice.mockData ? MockDIGetter() : ProdDIGetter();
 
   ///Logger
   sl.registerLazySingleton<Logger>(

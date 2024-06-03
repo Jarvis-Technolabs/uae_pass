@@ -11,7 +11,7 @@ class AppLogPrinter extends LogPrinter {
 
   @override
   List<String> log(LogEvent event) {
-    if (ENABLE_STORING_LOGS_TO_FILE) {
+    if (kEnableStoringLogsToFile) {
       loggerFileUtil.saveLogs(event.message);
     }
     return [event.message];

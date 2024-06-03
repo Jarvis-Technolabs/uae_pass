@@ -12,7 +12,7 @@ class UAEPassWebViewResultModel {
     required this.status,
     required this.message,
     this.uaeDataModel,
-    this.statusCode = RESULT_OK,
+    this.statusCode = kOkResultCode,
   });
 
   @override

@@ -21,8 +21,8 @@ class UaePassAppLocalizations {
   late Map<String, String> _localizedStrings;
 
   Future<bool> load() async {
-    ByteData bytes =
-        await rootBundle.load('${LANG_PATH}lang_${locale.languageCode}.json');
+    ByteData bytes = await rootBundle
+        .load('${kLanguagePath}lang_${locale.languageCode}.json');
     String jsonString = utf8.decode(bytes.buffer.asUint8List());
 
     Map<String, dynamic> jsonMap = json.decode(jsonString);
@@ -40,7 +40,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) {
-    return [EN, AR].contains(locale.languageCode);
+    return [kEn, kAr].contains(locale.languageCode);
   }
 
   @override

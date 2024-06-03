@@ -69,7 +69,7 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
             await webView?.clearCache();
             UAEPassWebViewResultModel uAEPassWebViewResultModel =
                 UAEPassWebViewResultModel(
-              status: (state.uaeDataModel.userType != USER_TYPE_SOP1),
+              status: (state.uaeDataModel.userType != kUserTypeSop1),
               message: "",
               uaeDataModel: state.uaeDataModel,
             );
@@ -78,9 +78,9 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
             /// Error
             await webView?.clearCache();
             String? errorMessage = state.errorMessage;
-            if (state.apiStatus == PROFILE_ERROR_USER_TYPE_SOP1) {
+            if (state.apiStatus == kSop1UserTypeErrorCode) {
               errorMessage = UaePassAppLocalizations.of(context)
-                  .translate(LABEL_YOUR_ACCOUNT_UNVERIFIED);
+                  .translate(kLabelYourAccountUnverified);
             }
             UAEPassWebViewResultModel uAEPassWebViewResultModel =
                 UAEPassWebViewResultModel(
@@ -127,8 +127,8 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
                     initialData: true,
                     stream: showLoadingStreamController.stream,
                     builder: (context, snapshot) => snapshot.data!
-                        ? Center(
-                            child: const CircularProgressIndicator(),
+                        ? const Center(
+                            child: CircularProgressIndicator(),
                           )
                         : const SizedBox.shrink(),
                   )
@@ -165,14 +165,14 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
     required String redirectUrl,
     required String clientID,
   }) =>
-      "$baseUrl$UAE_PASS_AUTHENTICATION_URL?redirect_uri=$redirectUrl&client_id=$clientID&$KEY_STATE=$state&response_type=$RESPONSE_TYPE&scope=$SCOPE&acr_values=${isMobileApp ? ACR_VALUES_MOBILE : ACR_VALUES_WEB}&ui_locales=en";
+      "$baseUrl$kUaePassAuthenticationUrl?redirect_uri=$redirectUrl&client_id=$clientID&$kKeyState=$state&response_type=$kResponseType&scope=$kScope&acr_values=${isMobileApp ? kUaePassMobileAuthenticationFlow : kUaePassWebAuthenticationFlow}&ui_locales=en";
 
   Future<bool> onClickBack() async {
     UAEPassWebViewResultModel model = UAEPassWebViewResultModel(
         status: false,
-        statusCode: USER_CANCELLED,
+        statusCode: kUserCancelledCode,
         message:
-            UaePassAppLocalizations.of(context).translate(LABEL_USER_CANCEL));
+            UaePassAppLocalizations.of(context).translate(kLabelUserCancel));
     await webView?.clearCache();
     routeStreamController.add(true);
     Navigator.of(context).pop(model);
@@ -205,19 +205,19 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
           String url = navigationAction.request.url.toString();
 
           /// check if url define to redirect in uae pass app or web otherwise send in else part
-          if (url.contains(DIGITAL_ID_URL_APP)) {
+          if (url.contains(kDigitalIdUrlApp)) {
             /// check if uae pass production app and in android
             if (!FlavourConfig.isProd()) {
               /// replace android schema with android staging schema for uae pass app
-              url = url.replaceAll(UAE_PASS_ANDROID_PROD_BUNDLE_ID,
-                  UAE_PASS_ANDROID_STAGING_BUNDLE_ID);
+              url = url.replaceAll(
+                  kUaePassAndroidBundleId, kUaePassAndroidStagingBundleId);
             }
 
             /// get success url or failure url for loading when authorization is successfully
             successUrl = CommonUtilities()
-                .getQueryParameterValue(KEY_SUCCESS_URL, WebUri(url));
+                .getQueryParameterValue(kKeySuccessUrl, WebUri(url));
             failureUrl = CommonUtilities()
-                .getQueryParameterValue(KEY_FAILURE_URL, WebUri(url));
+                .getQueryParameterValue(kKeyFailureUrl, WebUri(url));
 
             /// url to pass in uae pass app for authorization
             Uri callBackUri = WebUri(url);
@@ -228,24 +228,23 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
             /// change some parameter based on platform android and ios
             if (Platform.isAndroid) {
               queryParameter.update(
-                KEY_SUCCESS_URL,
+                kKeySuccessUrl,
                 (existingValue) => FlavourConfig.instance.redirectUrl,
                 ifAbsent: () => FlavourConfig.instance.redirectUrl,
               );
 
               queryParameter.update(
-                KEY_FAILURE_URL,
+                kKeyFailureUrl,
                 (existingValue) => FlavourConfig.instance.redirectUrl,
                 ifAbsent: () => FlavourConfig.instance.redirectUrl,
               );
 
               callBackUri =
                   callBackUri.replace(queryParameters: queryParameter);
-              latestUrl =
-                  callBackUri.toString() + KEY_CLOSE_ON_DONE_FALSE_VALUE;
+              latestUrl = callBackUri.toString() + kKeyCloseOnDoneFalseValue;
             } else {
-              queryParameter.remove(KEY_CLOSE_ON_DONE);
-              queryParameter.remove(KEY_BROWSER_PACKAGE);
+              queryParameter.remove(kKeyCloseOnDone);
+              queryParameter.remove(kKeyBrowserPackage);
               callBackUri =
                   callBackUri.replace(queryParameters: queryParameter);
               latestUrl = callBackUri.toString();
@@ -255,29 +254,29 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
                 await UaePassPlatform.instance.openUaePassApp(url: latestUrl);
 
             /// check if uae pass app returning with valid success data
-            if (intent != null && intent == KEY_LOAD_SUCCESS_URL) {
+            if (intent != null && intent == kKeyLoadSuccessUrl) {
               webView?.loadUrl(
                 urlRequest: URLRequest(
                   url: WebUri(successUrl!),
                 ),
               );
               return NavigationActionPolicy.CANCEL;
-            } else if (intent != null && intent == KEY_CANCELLED) {
+            } else if (intent != null && intent == kKeyCancelled) {
               BlocProvider.of<UAEPassWebViewBloc>(context).add(
                 ErrorEvent(
                   UaePassAppLocalizations.of(context)
-                      .translate(LABEL_USER_CANCEL),
-                  USER_CANCELLED,
+                      .translate(kLabelUserCancel),
+                  kUserCancelledCode,
                 ),
               );
               return NavigationActionPolicy.CANCEL;
             }
             return NavigationActionPolicy.ALLOW;
-          } else if ((Platform.isIOS && url.contains(UAE_PASS_IOS_APP_LINK)) ||
-              (Platform.isAndroid && url.contains(UAE_PASS_ANDROID_APP_LINK))) {
+          } else if ((Platform.isIOS && url.contains(kUaePassIosAppLink)) ||
+              (Platform.isAndroid && url.contains(kUaePassAndroidAppLink))) {
             StoreRedirect.redirect(
               androidAppId: FlavourConfig.instance.androidPackageId,
-              iOSAppId: UAE_PASS_IOS_APP_STORE_ID,
+              iOSAppId: kUaePassIosAppStoreId,
             );
             if (Platform.isAndroid) {
               return NavigationActionPolicy.CANCEL;
@@ -287,9 +286,8 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
           } else if (url.startsWith(FlavourConfig.instance.cancelledUrl)) {
             BlocProvider.of<UAEPassWebViewBloc>(context).add(
               ErrorEvent(
-                UaePassAppLocalizations.of(context)
-                    .translate(LABEL_USER_CANCEL),
-                USER_CANCELLED,
+                UaePassAppLocalizations.of(context).translate(kLabelUserCancel),
+                kUserCancelledCode,
               ),
             );
             return NavigationActionPolicy.ALLOW;
@@ -298,25 +296,25 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
             if (url.startsWith(FlavourConfig.instance.redirectUrl)) {
               /// get access code and current state
               String? code = CommonUtilities()
-                  .getQueryParameterValue(KEY_CODE, WebUri(url));
+                  .getQueryParameterValue(kKeyCode, WebUri(url));
               String? currentState = CommonUtilities()
-                  .getQueryParameterValue(KEY_STATE, WebUri(url));
+                  .getQueryParameterValue(kKeyState, WebUri(url));
               String? error = CommonUtilities()
-                  .getQueryParameterValue(KEY_ERROR, WebUri(url));
+                  .getQueryParameterValue(kKeyError, WebUri(url));
 
               /// check any error exist
               if (error != null) {
                 /// check type of error and close with error
-                if (error.contains(KEY_ACCESS_DENIED)) {
+                if (error.contains(kKeyAccessDenied)) {
                   BlocProvider.of<UAEPassWebViewBloc>(context).add(ErrorEvent(
                       UaePassAppLocalizations.of(context)
-                          .translate(LABEL_USER_CANCEL),
-                      USER_CANCELLED));
+                          .translate(kLabelUserCancel),
+                      kUserCancelledCode));
                 } else {
                   BlocProvider.of<UAEPassWebViewBloc>(context).add(ErrorEvent(
                       UaePassAppLocalizations.of(context)
-                          .translate(LABEL_USER_CANCEL),
-                      USER_CANCELLED));
+                          .translate(kLabelUserCancel),
+                      kUserCancelledCode));
                 }
                 return NavigationActionPolicy.ALLOW;
               }
@@ -375,13 +373,12 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
         backgroundColor: backgroundColor,
         title: titleWidget ??
             Text(
-              UaePassAppLocalizations.of(context)
-                  .translate(LABEL_TITLE_UAE_PASS),
+              UaePassAppLocalizations.of(context).translate(kLabelTitleUaePass),
               style: TextStyle(
                 color: widget.isDarkMode ? Colors.white : Colors.black,
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
-                fontFamily: FONT_FAMILY_GE_FLOW,
+                fontFamily: kFontFamilyGeFlow,
               ),
             ),
         shadowColor: shadowColor,
@@ -397,7 +394,7 @@ class UAEPassWebViewScreenState extends State<UAEPassWebViewScreen> {
                   await onClickBack();
                 }
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back_ios_rounded,
               ),
             ),

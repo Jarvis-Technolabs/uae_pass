@@ -1,19 +1,19 @@
 class UAEPassAccessToken {
-  String? grant_type;
+  String? grantType;
   String? code;
-  String? redirect_uri;
+  String? redirectUri;
 
   UAEPassAccessToken({
-    this.grant_type,
+    this.grantType,
     this.code,
-    this.redirect_uri,
+    this.redirectUri,
   });
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['grant_type'] = grant_type;
+    data['grant_type'] = grantType;
     data['code'] = code;
-    data['redirect_uri'] = redirect_uri;
+    data['redirect_uri'] = redirectUri;
     return data;
   }
 }

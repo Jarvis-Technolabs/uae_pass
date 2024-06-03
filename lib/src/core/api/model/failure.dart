@@ -4,7 +4,7 @@ abstract class Failure extends Equatable {
   final String errorMessage;
   final int statusCode;
 
-  Failure({
+  const Failure({
     required this.errorMessage,
     required this.statusCode,
   });
@@ -15,7 +15,7 @@ class ServerFailure extends Failure {
   final int statusCode;
   final String? apiStatusCode;
 
-  ServerFailure({
+  const ServerFailure({
     required this.errorMessage,
     required this.statusCode,
     this.apiStatusCode,
@@ -25,5 +25,9 @@ class ServerFailure extends Failure {
         );
 
   @override
-  List<Object?> get props => [errorMessage, statusCode, apiStatusCode];
+  List<Object?> get props => [
+        errorMessage,
+        statusCode,
+        apiStatusCode,
+      ];
 }

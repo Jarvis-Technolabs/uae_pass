@@ -13,7 +13,7 @@ This package allows the Flutter app to integrate the UAE pass.
 
 | **Package version** | **Dart version** | **Flutter version** |
 |:-------------------:|:----------------:|:-------------------:|
-|  0.0.1+1 - 0.0.4+4  |      3.2.6       |      >=1.17.0       |
+|  0.0.1+1 - 0.0.5+5  |      3.2.6       |      >=1.17.0       |
 
 ## **Getting Started**
 
@@ -25,7 +25,7 @@ Add the following dependency to your pubspec.yaml file:
 
 ``` dart
     dependencies:
-      ft_uaepass: ^0.0.4+4
+      ft_uaepass: ^0.0.5+5
 
 ```
 
