@@ -9,6 +9,7 @@ import 'package:ft_uaepass/src/features/uae_pass_web_view/domain/uae_pass_repo.d
 import 'uae_pass_web_view_event.dart';
 import 'uae_pass_web_view_state.dart';
 
+/// Uae Pass web view bloc for calling auth and profile API
 class UAEPassWebViewBloc
     extends Bloc<UAEPassWebViewEvent, UAEPassWebViewState> {
   UaePassRepo? uaePassRepo = sl();

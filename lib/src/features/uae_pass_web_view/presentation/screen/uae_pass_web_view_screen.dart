@@ -21,6 +21,7 @@ import '../bloc/uae_pass_web_view_bloc.dart';
 import '../bloc/uae_pass_web_view_event.dart';
 import '../bloc/uae_pass_web_view_state.dart';
 
+/// Uae Pass web view screen with progress indicator and web view for sign in
 class UAEPassWebViewScreen extends StatefulWidget {
   final bool isDarkMode;
   final PreferredSizeWidget? appBar;

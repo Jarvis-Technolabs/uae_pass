@@ -5,6 +5,7 @@ import 'package:ft_uaepass/src/features/uae_pass_web_view/data/models/app_bar_pr
 import 'bloc/uae_pass_web_view_bloc.dart';
 import 'screen/uae_pass_web_view_screen.dart';
 
+///Uae Pass web view page that provides UAEPassWebViewBloc to UAEPassWebViewScreen
 class UAEPassWebViewPage extends StatefulWidget {
   final bool isDarkMode;
   final PreferredSizeWidget? appBar;

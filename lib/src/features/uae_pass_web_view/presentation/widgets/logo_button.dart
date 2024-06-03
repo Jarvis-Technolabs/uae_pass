@@ -3,6 +3,7 @@ import 'package:ft_uaepass/src/core/const/image_constants.dart';
 import 'package:ft_uaepass/src/core/enum/button_shape.dart';
 import 'package:ft_uaepass/src/core/extention/image_extension.dart';
 
+/// Uae Pass logo button
 class LogoButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final EdgeInsetsDirectional? padding;
