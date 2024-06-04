@@ -38,7 +38,7 @@ Then run:
 
 ### **Android Setup**
 
-- Update android:launchMode="singleTask" the AndroidManifest.xml file
+- Update android:launchMode="singleTask" to AndroidManifest.xml file
 
 ``` xml
     <activity
