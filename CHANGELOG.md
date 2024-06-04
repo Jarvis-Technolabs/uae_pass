@@ -1,6 +1,7 @@
 ## 0.0.6+6
 
 * Resolved analysis issues
+* Fixed assets not found issue
 
 ## 0.0.5+5
 
