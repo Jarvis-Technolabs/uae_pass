@@ -13,7 +13,7 @@ This package allows the Flutter app to integrate the UAE pass.
 
 | **Package version** | **Dart version** | **Flutter version** |
 |:-------------------:|:----------------:|:-------------------:|
-|  0.0.1+1 - 0.0.6+6  |  >=3.2.6 <4.0.0  |      >=1.17.0       |
+|  0.0.1+1 - 0.0.7+7  |  >=3.2.6 <4.0.0  |      >=1.17.0       |
 
 ## **Getting Started**
 
@@ -25,7 +25,7 @@ Add the following dependency to your pubspec.yaml file:
 
 ``` dart
     dependencies:
-      ft_uaepass: ^0.0.6+6
+      ft_uaepass: ^0.0.7+7
 
 ```
 
@@ -37,6 +37,16 @@ Then run:
 ```
 
 ### **Android Setup**
+
+- Update android:launchMode="singleTask" the AndroidManifest.xml file
+
+``` xml
+    <activity
+       ..... 
+       android:launchMode="singleTask"
+       .....
+    </activity>
+```
 
 - Add Permission and intent filter in AndroidManifest.xml file
 
