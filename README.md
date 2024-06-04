@@ -44,7 +44,7 @@ Then run:
     <activity
        ..... 
        android:launchMode="singleTask"
-       .....
+       .....>
     </activity>
 ```
 
